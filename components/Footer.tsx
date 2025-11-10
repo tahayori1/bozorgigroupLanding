@@ -18,8 +18,8 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center md:text-start">
           {/* Column 1: Company Info */}
           <div className="space-y-4">
-            <a href="#home" className="inline-block text-2xl font-bold tracking-wider text-black dark:text-white uppercase">
-              Bozorgi <span className="text-amber-500 dark:text-amber-400">Group</span>
+            <a href="#home" className="inline-block">
+               <img className="h-12 w-auto mx-auto md:mx-0" src="/images/logo-bozorgi.png" alt="Bozorgi Group Logo" />
             </a>
             <p className="text-gray-600 dark:text-gray-400 max-w-xs mx-auto md:mx-0">"{t['hero.motto']}"</p>
           </div>
