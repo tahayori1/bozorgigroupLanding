@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
           {/* Column 1: Company Info */}
           <div className="space-y-4">
             <a href="#home" className="inline-block">
-               <img className="h-12 w-auto mx-auto md:mx-0" src="/logo-bozorgi.png" alt="Bozorgi Group Logo" />
+               <img className="h-12 w-auto mx-auto md:mx-0" src="/images/logo-bozorgi.png" alt="Bozorgi Group Logo" />
             </a>
             <p className="text-gray-600 dark:text-gray-400 max-w-xs mx-auto md:mx-0">"{t['hero.motto']}"</p>
           </div>
