@@ -1,23 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
-import Philosophy from './components/Philosophy';
-import Portfolio from './components/Portfolio';
-import Team from './components/Team';
+import Products from './components/Portfolio';
+import History from './components/Team';
+import Humanity from './components/Philosophy';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { useLanguage } from './context/LanguageContext';
 
 const App: React.FC = () => {
+  const { locale } = useLanguage();
+
+  useEffect(() => {
+    document.documentElement.lang = locale;
+    document.documentElement.dir = locale === 'ar' ? 'rtl' : 'ltr';
+  }, [locale]);
+
   return (
     <div className="bg-[#0a0a0a] text-gray-300 font-sans selection:bg-amber-500 selection:text-black">
       <Header />
       <main>
         <Hero />
         <About />
-        <Philosophy />
-        <Portfolio />
-        <Team />
+        <Products />
+        <History />
+        <Humanity />
         <Contact />
       </main>
       <Footer />

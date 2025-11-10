@@ -1,11 +1,13 @@
-export interface PortfolioItem {
-  name: string;
-  logoUrl: string;
-  description: string;
+export interface Product {
+  nameKey: string;
+  imageUrl: string;
+  descriptionKey: string;
 }
 
-export interface TeamMember {
-  name:string;
-  title: string;
+export interface FamilyMember {
+  nameKey: string;
+  titleKey: string;
   imageUrl: string;
+  descriptionKey: string;
+  generation: number;
 }

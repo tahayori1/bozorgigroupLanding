@@ -1,20 +1,24 @@
 import React from 'react';
+import { useLanguage } from '../context/LanguageContext';
 
 const Hero: React.FC = () => {
+  const { t } = useLanguage();
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center text-center text-white overflow-hidden">
       <div
         className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
-        style={{ backgroundImage: "url('https://picsum.photos/1920/1080?grayscale&blur=2')" }}
+        style={{ backgroundImage: "url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=2070&auto=format&fit=crop')" }}
       ></div>
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
       <div className="relative z-10 p-8 max-w-4xl mx-auto animate-fadeIn">
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase mb-4">
-          Investing in <br />
-          <span className="text-amber-400">Visionary Ventures</span>
+          Bozorgi <span className="text-amber-400">Group</span>
         </h1>
         <p className="text-lg md:text-xl max-w-2xl mx-auto text-gray-300">
-          Bozorgi Group is a private investment firm focused on partnering with exceptional founders to build enduring, market-leading companies.
+          {t['hero.subtitle']}
+        </p>
+        <p className="mt-4 text-2xl font-semibold tracking-wider text-amber-400/90">
+          "{t['hero.motto']}"
         </p>
       </div>
        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10">
