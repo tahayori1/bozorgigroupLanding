@@ -77,7 +77,7 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
             <a href="#home">
-              <img className="h-12 w-auto" src="/images/logo-bozorgi.png" alt="Bozorgi Group Logo" />
+              <img className="h-12 w-auto" src="/logo-bozorgi.png" alt="Bozorgi Group Logo" />
             </a>
           </div>
           <div className="hidden md:flex items-center">
