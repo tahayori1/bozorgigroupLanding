@@ -8,8 +8,9 @@ const Hero: React.FC = () => {
       <div
         className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
         style={{ backgroundImage: "url('https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=2070&auto=format&fit=crop')" }}
+        aria-hidden="true"
       ></div>
-      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70"></div>
+      <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70" aria-hidden="true"></div>
       <div className="relative z-10 p-8 max-w-4xl mx-auto animate-fadeIn">
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase mb-4">
           Bozorgi <span className="text-amber-400">Group</span>
@@ -22,7 +23,7 @@ const Hero: React.FC = () => {
         </p>
       </div>
        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10">
-        <a href="#about" aria-label="Scroll down">
+        <a href="#about" aria-label={t['hero.scroll']}>
           <svg className="w-8 h-8 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
             <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
           </svg>

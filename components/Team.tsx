@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import type { FamilyMember } from '../types';
 import { useLanguage } from '../context/LanguageContext';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 const familyData: FamilyMember[] = [
   { generation: 5, nameKey: 'family.gen5.name', titleKey: 'family.gen5.title', imageUrl: 'https://bozorgigroup.com/img/bozorg%20bozorgi.gif', descriptionKey: 'family.gen5.description' },
@@ -18,7 +19,7 @@ const HistoryCard: React.FC<{ member: FamilyMember, isRightAligned: boolean }> =
                 <img src={member.imageUrl} alt={t[member.nameKey]} className="w-20 h-20 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700 flex-shrink-0" />
                 <div className="flex-1">
                     <h3 className="text-lg font-bold text-gray-900 dark:text-white">{t[member.nameKey]}</h3>
-                    <p className="text-sm text-amber-500 dark:text-amber-400">{t[member.titleKey]}</p>
+                    <p className="text-sm text-amber-600 dark:text-amber-400">{t[member.titleKey]}</p>
                     <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{t[member.descriptionKey]}</p>
                 </div>
             </div>
@@ -28,8 +29,15 @@ const HistoryCard: React.FC<{ member: FamilyMember, isRightAligned: boolean }> =
 
 const History: React.FC = () => {
   const { t, locale } = useLanguage();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersectionObserver(sectionRef, { triggerOnce: true, threshold: 0.1 });
+
   return (
-    <section id="history" className="py-20 md:py-32">
+    <section 
+      id="history"
+      ref={sectionRef}
+      className={`py-20 md:py-32 transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 mb-20">
           <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">{t['history.title']}</h2>
@@ -40,7 +48,7 @@ const History: React.FC = () => {
 
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute top-0 h-full w-0.5 bg-gray-300 dark:bg-gray-700 start-5 md:start-1/2 md:-translate-x-1/2"></div>
+          <div className="absolute top-0 h-full w-0.5 bg-gray-300 dark:bg-gray-700 start-5 md:start-1/2 md:-translate-x-1/2" aria-hidden="true"></div>
           
           <div className="space-y-16">
             {familyData.map((member, index) => {

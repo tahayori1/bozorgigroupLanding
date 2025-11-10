@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 const FeatureCard: React.FC<{ icon: React.ReactNode; title: string; text: string }> = ({ icon, title, text }) => (
   <div className="flex items-start space-x-4 rtl:space-x-reverse">
     <div className="flex-shrink-0">
-      <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-500/10 text-amber-500 dark:text-amber-400">
+      <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400">
         {icon}
       </div>
     </div>
@@ -18,8 +19,15 @@ const FeatureCard: React.FC<{ icon: React.ReactNode; title: string; text: string
 
 const About: React.FC = () => {
   const { t, locale } = useLanguage();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersectionObserver(sectionRef, { triggerOnce: true, threshold: 0.2 });
+
   return (
-    <section id="about" className="py-20 md:py-32 bg-gray-50 dark:bg-[#111111]">
+    <section 
+      id="about" 
+      ref={sectionRef} 
+      className={`py-20 md:py-32 bg-gray-50 dark:bg-[#111111] transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl tracking-tight">

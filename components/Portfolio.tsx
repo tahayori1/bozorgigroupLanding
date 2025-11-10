@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import type { Product } from '../types';
 import { useLanguage } from '../context/LanguageContext';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 const productsData: Product[] = [
   { nameKey: 'products.mdf.name', imageUrl: 'https://bozorgigroup.com/img/mdf-bozorgi-scaled.jpg', descriptionKey: 'products.mdf.description' },
@@ -14,8 +15,15 @@ const productsData: Product[] = [
 
 const Products: React.FC = () => {
   const { t } = useLanguage();
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const isVisible = useIntersectionObserver(sectionRef, { triggerOnce: true, threshold: 0.1 });
+
   return (
-    <section id="products" className="py-20 md:py-32 bg-gray-50 dark:bg-[#111111]">
+    <section 
+      id="products"
+      ref={sectionRef}
+      className={`py-20 md:py-32 bg-gray-50 dark:bg-[#111111] transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
           <h2 className="text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
@@ -33,7 +41,7 @@ const Products: React.FC = () => {
                 src={item.imageUrl} 
                 alt={t[item.nameKey]}
               />
-              <h3 className="text-lg font-bold text-amber-500 dark:text-amber-400">{t[item.nameKey]}</h3>
+              <h3 className="text-lg font-bold text-amber-600 dark:text-amber-400">{t[item.nameKey]}</h3>
               <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{t[item.descriptionKey]}</p>
             </div>
           ))}

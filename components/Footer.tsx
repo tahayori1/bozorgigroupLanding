@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 const SocialIcon: React.FC<{ href: string, path: string, label: string }> = ({ href, path, label }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-amber-500 dark:hover:text-amber-400 transition">
+  <a href={href} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition">
     <span className="sr-only">{label}</span>
     <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path d={path} />
@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
           {/* Column 1: Company Info */}
           <div className="space-y-4">
             <a href="#home" className="inline-block">
-               <img className="h-12 w-auto mx-auto md:mx-0" src="/logo-bozorgi.png" alt="Bozorgi Group Logo" />
+               <img className="h-12 w-auto mx-auto md:mx-0" src="/images/logo-bozorgi.png" alt="Bozorgi Group Logo" />
             </a>
             <p className="text-gray-600 dark:text-gray-400 max-w-xs mx-auto md:mx-0">"{t['hero.motto']}"</p>
           </div>

@@ -8,6 +8,7 @@ const Chatbox: React.FC = () => {
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const chatboxRef = useRef<HTMLDivElement>(null);
   const { t, locale } = useLanguage();
   const initialMessage = t['chatbox.initialMessage'];
 
@@ -22,6 +23,49 @@ const Chatbox: React.FC = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+
+  // Focus trapping for accessibility
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const focusableElements = chatboxRef.current?.querySelectorAll<HTMLElement>(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements?.[0];
+    const lastElement = focusableElements?.[focusableElements.length - 1];
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      if (e.shiftKey) { // Shift + Tab
+        if (document.activeElement === firstElement) {
+          lastElement?.focus();
+          e.preventDefault();
+        }
+      } else { // Tab
+        if (document.activeElement === lastElement) {
+          firstElement?.focus();
+          e.preventDefault();
+        }
+      }
+    };
+
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+    
+    firstElement?.focus();
+
+    document.addEventListener('keydown', handleKeyDown);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+      document.removeEventListener('keydown', handleEscape);
+    };
+
+  }, [isOpen]);
   
   const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,6 +99,8 @@ const Chatbox: React.FC = () => {
           onClick={() => setIsOpen(!isOpen)}
           className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center text-black shadow-lg hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900 transform transition-transform hover:scale-110"
           aria-label={t['chatbox.title']}
+          aria-expanded={isOpen}
+          aria-controls="chatbox-window"
         >
           {isOpen ? (
              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -69,11 +115,16 @@ const Chatbox: React.FC = () => {
       </div>
 
       <div
+        id="chatbox-window"
+        ref={chatboxRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="chatbox-header"
         className={`fixed bottom-24 z-50 w-[90vw] max-w-sm h-[60vh] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-2xl flex flex-col transition-all duration-300 ease-in-out ${locale === 'ar' ? 'left-5' : 'right-5'} ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
       >
         <header className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-t-lg">
-          <h3 className="text-lg font-bold text-gray-900 dark:text-white">{t['chatbox.title']}</h3>
-          <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white">
+          <h3 id="chatbox-header" className="text-lg font-bold text-gray-900 dark:text-white">{t['chatbox.title']}</h3>
+          <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded" aria-label={t['chatbox.close']}>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
         </header>
@@ -109,10 +160,11 @@ const Chatbox: React.FC = () => {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               placeholder={t['chatbox.placeholder']}
+              aria-label={t['chatbox.placeholder']}
               className="flex-1 w-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500"
               disabled={isLoading}
             />
-            <button type="submit" disabled={isLoading || !inputValue.trim()} className="w-10 h-10 flex-shrink-0 bg-amber-500 text-black rounded-full flex items-center justify-center disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed">
+            <button type="submit" disabled={isLoading || !inputValue.trim()} className="w-10 h-10 flex-shrink-0 bg-amber-500 text-black rounded-full flex items-center justify-center disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900" aria-label={t['chatbox.send']}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform rtl:rotate-180" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
             </button>
           </div>

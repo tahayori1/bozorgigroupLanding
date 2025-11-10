@@ -64,7 +64,7 @@ const Header: React.FC = () => {
     <>
       {navLinks.map((link) => (
         <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)}
-          className="block md:inline-block px-3 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none transition duration-150 ease-in-out">
+          className="block md:inline-block px-3 py-2 rounded-md text-sm font-medium text-gray-600 dark:text-gray-300 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 transition duration-150 ease-in-out">
           {t[link.labelKey]}
         </a>
       ))}
@@ -76,8 +76,8 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0">
-            <a href="#home">
-              <img className="h-12 w-auto" src="/logo-bozorgi.png" alt="Bozorgi Group Logo" />
+            <a href="#home" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded-sm">
+              <img className="h-12 w-auto" src="/images/logo-bozorgi.png" alt="Bozorgi Group Logo" />
             </a>
           </div>
           <div className="hidden md:flex items-center">
@@ -86,14 +86,14 @@ const Header: React.FC = () => {
             </nav>
             {/* Theme Switcher */}
             <div className="relative ms-4" ref={themeDropdownRef}>
-              <button onClick={() => setThemeDropdownOpen(!themeDropdownOpen)} className="flex items-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+              <button onClick={() => setThemeDropdownOpen(!themeDropdownOpen)} className="flex items-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500" aria-haspopup="true" aria-expanded={themeDropdownOpen}>
                 {themes[theme].icon}
                 <svg className="w-4 h-4 ms-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
               </button>
               {themeDropdownOpen && (
-                <div className="absolute end-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
+                <div className="absolute end-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical">
                   {Object.entries(themes).map(([key, value]) => (
-                    <button key={key} onClick={() => handleThemeChange(key as Theme)} className="text-left w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <button key={key} onClick={() => handleThemeChange(key as Theme)} className="text-left w-full flex items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:bg-gray-100 dark:focus-visible:bg-gray-700" role="menuitem">
                       {value.icon} {value.name}
                     </button>
                   ))}
@@ -102,14 +102,14 @@ const Header: React.FC = () => {
             </div>
             {/* Language Switcher */}
             <div className="relative ms-4" ref={langDropdownRef}>
-              <button onClick={() => setLangDropdownOpen(!langDropdownOpen)} className="flex items-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M3 5h12M9 3v2m4 13-4-4-4 4M19 17v-2a4 4 0 00-4-4H9M17 13l-4 4-4-4M12 17.75V19.5" /></svg>
+              <button onClick={() => setLangDropdownOpen(!langDropdownOpen)} className="flex items-center p-2 rounded-md text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500" aria-haspopup="true" aria-expanded={langDropdownOpen}>
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}><path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9V3m0 18a9 9 0 009-9m-9 9a9 9 0 00-9-9" /></svg>
                 <svg className="w-4 h-4 ms-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
               </button>
               {langDropdownOpen && (
-                <div className="absolute end-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5">
+                <div className="absolute end-0 mt-2 w-32 bg-white dark:bg-gray-800 rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5" role="menu" aria-orientation="vertical">
                   {Object.entries(languages).map(([key, name]) => (
-                    <button key={key} onClick={() => handleLocaleChange(key as 'en' | 'es' | 'ar')} className="text-left w-full block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700">
+                    <button key={key} onClick={() => handleLocaleChange(key as 'en' | 'es' | 'ar')} className="text-left w-full block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:bg-gray-100 dark:focus-visible:bg-gray-700" role="menuitem">
                       {name}
                     </button>
                   ))}
@@ -118,7 +118,7 @@ const Header: React.FC = () => {
             </div>
           </div>
           <div className="md:hidden flex items-center">
-            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none" aria-expanded="false">
+            <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="inline-flex items-center justify-center p-2 rounded-md text-gray-500 dark:text-gray-400 hover:text-black dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500" aria-expanded={mobileMenuOpen} aria-controls="mobile-menu">
               <span className="sr-only">Open main menu</span>
               <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
                 {mobileMenuOpen ? (<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />) : (<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />) }
@@ -128,7 +128,7 @@ const Header: React.FC = () => {
         </div>
       </div>
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
+        <div id="mobile-menu" className="md:hidden bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-800">
           <div className="px-2 pt-2 pb-3 sm:px-3 space-y-1">
             {renderNavLinks()}
           </div>
