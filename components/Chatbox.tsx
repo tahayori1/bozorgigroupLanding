@@ -13,12 +13,14 @@ const Chatbox: React.FC = () => {
   const { t, locale } = useLanguage();
 
   useEffect(() => {
+    // Reset the chat session when the language changes.
+    chatRef.current = null;
     if (t['chatbox.initialMessage']) {
       setMessages([
-        { id: 0, text: t['chatbox.initialMessage'], sender: 'bot' }
+        { id: Date.now(), text: t['chatbox.initialMessage'], sender: 'bot' }
       ]);
     }
-  }, [t['chatbox.initialMessage']]);
+  }, [locale, t]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
