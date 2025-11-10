@@ -4,13 +4,13 @@ import { useLanguage } from '../context/LanguageContext';
 const FeatureCard: React.FC<{ icon: React.ReactNode; title: string; text: string }> = ({ icon, title, text }) => (
   <div className="flex items-start space-x-4 rtl:space-x-reverse">
     <div className="flex-shrink-0">
-      <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-500/10 text-amber-400">
+      <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-500/10 text-amber-500 dark:text-amber-400">
         {icon}
       </div>
     </div>
     <div>
-      <h3 className="text-lg font-bold text-white">{title}</h3>
-      <p className="mt-1 text-gray-400">{text}</p>
+      <h3 className="text-lg font-bold text-gray-900 dark:text-white">{title}</h3>
+      <p className="mt-1 text-gray-600 dark:text-gray-400">{text}</p>
     </div>
   </div>
 );
@@ -19,13 +19,13 @@ const FeatureCard: React.FC<{ icon: React.ReactNode; title: string; text: string
 const About: React.FC = () => {
   const { t, locale } = useLanguage();
   return (
-    <section id="about" className="py-20 md:py-32 bg-[#111111]">
+    <section id="about" className="py-20 md:py-32 bg-gray-50 dark:bg-[#111111]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl tracking-tight">
+          <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl tracking-tight">
             {t['about.title']}
           </h2>
-          <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-400">
+          <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-400">
             {t['about.description']}
           </p>
         </div>

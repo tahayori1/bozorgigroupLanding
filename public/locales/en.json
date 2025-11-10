@@ -62,5 +62,9 @@
     "chatbox.title": "Chat with Us",
     "chatbox.placeholder": "Type a message...",
     "chatbox.initialMessage": "Hello! How can I help you today regarding Bozorgi Group?",
-    "chatbox.typing": "Typing..."
+    "chatbox.typing": "Typing...",
+    "theme.title": "Theme",
+    "theme.light": "Light",
+    "theme.dark": "Dark",
+    "theme.auto": "Auto"
 }

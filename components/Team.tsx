@@ -13,13 +13,13 @@ const familyData: FamilyMember[] = [
 const HistoryCard: React.FC<{ member: FamilyMember, isRightAligned: boolean }> = ({ member, isRightAligned }) => {
     const { t } = useLanguage();
     return (
-        <div className="bg-[#1a1a1a] p-6 rounded-lg shadow-lg border border-gray-800 hover:border-amber-400/50 transition-all duration-300 transform hover:-translate-y-1">
+        <div className="bg-white dark:bg-[#1a1a1a] p-6 rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 hover:border-amber-500/50 dark:hover:border-amber-400/50 transition-all duration-300 transform hover:-translate-y-1">
             <div className={`flex items-start gap-4 ${isRightAligned ? 'md:flex-row-reverse md:text-right' : 'md:flex-row text-left'}`}>
-                <img src={member.imageUrl} alt={t[member.nameKey]} className="w-20 h-20 rounded-full object-cover border-2 border-gray-700 flex-shrink-0" />
+                <img src={member.imageUrl} alt={t[member.nameKey]} className="w-20 h-20 rounded-full object-cover border-2 border-gray-200 dark:border-gray-700 flex-shrink-0" />
                 <div className="flex-1">
-                    <h3 className="text-lg font-bold text-white">{t[member.nameKey]}</h3>
-                    <p className="text-sm text-amber-400">{t[member.titleKey]}</p>
-                    <p className="mt-2 text-sm text-gray-400">{t[member.descriptionKey]}</p>
+                    <h3 className="text-lg font-bold text-gray-900 dark:text-white">{t[member.nameKey]}</h3>
+                    <p className="text-sm text-amber-500 dark:text-amber-400">{t[member.titleKey]}</p>
+                    <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{t[member.descriptionKey]}</p>
                 </div>
             </div>
         </div>
@@ -32,15 +32,15 @@ const History: React.FC = () => {
     <section id="history" className="py-20 md:py-32">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center space-y-5 sm:mx-auto sm:max-w-xl sm:space-y-4 mb-20">
-          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">{t['history.title']}</h2>
-          <p className="text-xl text-gray-400">
+          <h2 className="text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">{t['history.title']}</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-400">
             {t['history.subtitle']}
           </p>
         </div>
 
         <div className="relative">
           {/* Vertical line */}
-          <div className="absolute top-0 h-full w-0.5 bg-gray-700 start-5 md:start-1/2 md:-translate-x-1/2"></div>
+          <div className="absolute top-0 h-full w-0.5 bg-gray-300 dark:bg-gray-700 start-5 md:start-1/2 md:-translate-x-1/2"></div>
           
           <div className="space-y-16">
             {familyData.map((member, index) => {
@@ -51,7 +51,7 @@ const History: React.FC = () => {
               return (
                 <div key={member.nameKey} className="relative md:grid md:grid-cols-2 md:gap-x-16 md:items-center">
                   {/* Circle marker */}
-                  <div className="absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-amber-400 text-black rounded-full flex items-center justify-center font-bold text-lg shadow-amber-400/20 shadow-lg start-5 -translate-x-1/2 md:start-1/2">
+                  <div className="absolute top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-amber-500 dark:bg-amber-400 text-black rounded-full flex items-center justify-center font-bold text-lg shadow-amber-400/20 shadow-lg start-5 -translate-x-1/2 md:start-1/2">
                     {member.generation}
                   </div>
 

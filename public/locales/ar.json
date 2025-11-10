@@ -62,5 +62,9 @@
     "chatbox.title": "الدردشة معنا",
     "chatbox.placeholder": "اكتب رسالة...",
     "chatbox.initialMessage": "مرحباً! كيف يمكنني مساعدتك اليوم بخصوص مجموعة بزرگی؟",
-    "chatbox.typing": "يكتب..."
+    "chatbox.typing": "يكتب...",
+    "theme.title": "المظهر",
+    "theme.light": "فاتح",
+    "theme.dark": "داكن",
+    "theme.auto": "تلقائي"
 }

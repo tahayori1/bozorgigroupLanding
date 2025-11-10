@@ -19,7 +19,7 @@ const App: React.FC = () => {
   }, [locale]);
 
   return (
-    <div className="bg-[#0a0a0a] text-gray-300 font-sans selection:bg-amber-500 selection:text-black">
+    <div className="bg-white dark:bg-[#0a0a0a] text-gray-800 dark:text-gray-300 font-sans selection:bg-amber-500 selection:text-black">
       <Header />
       <main>
         <Hero />

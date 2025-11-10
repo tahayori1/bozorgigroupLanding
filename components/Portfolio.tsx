@@ -15,26 +15,26 @@ const productsData: Product[] = [
 const Products: React.FC = () => {
   const { t } = useLanguage();
   return (
-    <section id="products" className="py-20 md:py-32 bg-[#111111]">
+    <section id="products" className="py-20 md:py-32 bg-gray-50 dark:bg-[#111111]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="lg:text-center">
-          <h2 className="text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+          <h2 className="text-3xl leading-8 font-extrabold tracking-tight text-gray-900 dark:text-white sm:text-4xl">
             {t['products.title']}
           </h2>
-          <p className="mt-4 max-w-2xl text-xl text-gray-400 lg:mx-auto">
+          <p className="mt-4 max-w-2xl text-xl text-gray-600 dark:text-gray-400 lg:mx-auto">
             {t['products.subtitle']}
           </p>
         </div>
         <div className="mt-12 grid gap-8 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {productsData.map((item) => (
-            <div key={item.nameKey} className="group flex flex-col items-center text-center p-6 bg-gray-900 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-500/10">
+            <div key={item.nameKey} className="group flex flex-col items-center text-center p-6 bg-white dark:bg-gray-900 rounded-lg transition duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-amber-500/10 border border-gray-200 dark:border-gray-800">
               <img 
                 className="h-40 w-full object-cover rounded-md mb-4"
                 src={item.imageUrl} 
                 alt={t[item.nameKey]}
               />
-              <h3 className="text-lg font-bold text-amber-400">{t[item.nameKey]}</h3>
-              <p className="mt-2 text-sm text-gray-400">{t[item.descriptionKey]}</p>
+              <h3 className="text-lg font-bold text-amber-500 dark:text-amber-400">{t[item.nameKey]}</h3>
+              <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">{t[item.descriptionKey]}</p>
             </div>
           ))}
         </div>
