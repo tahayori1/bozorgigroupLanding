@@ -56,5 +56,9 @@
     "humanity.schoolText": "Fundada en 1996 en Shiraz por Bozorgi Group, esta escuela secundaria es un testimonio de nuestro compromiso con la educación y el empoderamiento de la próxima generación.",
     "contact.title": "Contáctenos",
     "contact.subtitle": "Siempre estamos interesados en conectar con socios y clientes en todo el mundo.",
-    "footer.rights": "Todos los derechos reservados."
+    "footer.rights": "Todos los derechos reservados.",
+    "chatbox.title": "Chatea con nosotros",
+    "chatbox.placeholder": "Escribe un mensaje...",
+    "chatbox.initialMessage": "¡Hola! ¿Cómo puedo ayudarte hoy con respecto a Bozorgi Group?",
+    "chatbox.typing": "Escribiendo..."
 }

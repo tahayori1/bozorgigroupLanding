@@ -83,8 +83,8 @@ const Header: React.FC = () => {
                 onClick={() => setLangDropdownOpen(!langDropdownOpen)}
                 className="flex items-center p-2 rounded-md text-gray-300 hover:bg-gray-700"
               >
-                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m0 0a9 9 0 019 9m-9-9a9 9 0 009-9" />
+                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2h8a2 2 0 002-2v-1a2 2 0 012-2h1.945M7.7 9a3.09 3.09 0 015.6 0M12 21a9 9 0 100-18 9 9 0 000 18z" />
                 </svg>
                 <span className="ms-2 text-sm font-medium">{languages[locale]}</span>
                 <svg className="w-4 h-4 ms-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>

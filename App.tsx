@@ -7,6 +7,7 @@ import History from './components/Team';
 import Humanity from './components/Philosophy';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Chatbox from './components/Chatbox';
 import { useLanguage } from './context/LanguageContext';
 
 const App: React.FC = () => {
@@ -29,6 +30,7 @@ const App: React.FC = () => {
         <Contact />
       </main>
       <Footer />
+      <Chatbox />
     </div>
   );
 };

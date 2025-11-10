@@ -11,3 +11,9 @@ export interface FamilyMember {
   descriptionKey: string;
   generation: number;
 }
+
+export interface ChatMessage {
+  id: number;
+  text: string;
+  sender: 'user' | 'bot';
+}
