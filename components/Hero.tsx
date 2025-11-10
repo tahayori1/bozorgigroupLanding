@@ -13,12 +13,12 @@ const Hero: React.FC = () => {
       <div className="absolute top-0 left-0 w-full h-full bg-black opacity-70" aria-hidden="true"></div>
       <div className="relative z-10 p-8 max-w-4xl mx-auto animate-fadeIn">
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter uppercase mb-4">
-          Bozorgi <span className="text-amber-400">Group</span>
+          Bozorgi <span className="text-primary">Group</span>
         </h1>
         <p className="text-lg md:text-xl max-w-2xl mx-auto text-gray-300">
           {t['hero.subtitle']}
         </p>
-        <p className="mt-4 text-2xl font-semibold tracking-wider text-amber-400/90">
+        <p className="mt-4 text-2xl font-semibold tracking-wider text-primary/90">
           "{t['hero.motto']}"
         </p>
       </div>

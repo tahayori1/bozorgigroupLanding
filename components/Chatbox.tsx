@@ -97,7 +97,7 @@ const Chatbox: React.FC = () => {
       <div className={`fixed bottom-5 transition-all duration-300 z-50 ${locale === 'ar' ? 'left-5' : 'right-5'}`}>
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center text-black shadow-lg hover:bg-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900 transform transition-transform hover:scale-110"
+          className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-primary-foreground shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background transform transition-transform hover:scale-110"
           aria-label={t['chatbox.title']}
           aria-expanded={isOpen}
           aria-controls="chatbox-window"
@@ -120,11 +120,11 @@ const Chatbox: React.FC = () => {
         role="dialog"
         aria-modal="true"
         aria-labelledby="chatbox-header"
-        className={`fixed bottom-24 z-50 w-[90vw] max-w-sm h-[60vh] bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-lg shadow-2xl flex flex-col transition-all duration-300 ease-in-out ${locale === 'ar' ? 'left-5' : 'right-5'} ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+        className={`fixed bottom-24 z-50 w-[90vw] max-w-sm h-[60vh] bg-card text-card-foreground border border-border rounded-lg shadow-2xl flex flex-col transition-all duration-300 ease-in-out ${locale === 'ar' ? 'left-5' : 'right-5'} ${isOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
       >
-        <header className="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 rounded-t-lg">
-          <h3 id="chatbox-header" className="text-lg font-bold text-gray-900 dark:text-white">{t['chatbox.title']}</h3>
-          <button onClick={() => setIsOpen(false)} className="text-gray-500 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded" aria-label={t['chatbox.close']}>
+        <header className="flex items-center justify-between p-4 border-b border-border bg-muted/50 rounded-t-lg">
+          <h3 id="chatbox-header" className="text-lg font-bold">{t['chatbox.title']}</h3>
+          <button onClick={() => setIsOpen(false)} className="text-muted-foreground hover:text-foreground focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded" aria-label={t['chatbox.close']}>
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
           </button>
         </header>
@@ -133,18 +133,18 @@ const Chatbox: React.FC = () => {
           <div className="space-y-4">
             {messages.map(msg => (
               <div key={msg.id} className={`flex items-end gap-2 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
-                <div className={`max-w-xs md:max-w-md lg:max-w-xs px-4 py-2 rounded-2xl ${msg.sender === 'user' ? 'bg-amber-500 text-black rounded-br-none' : 'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-white rounded-bl-none'}`}>
+                <div className={`max-w-xs md:max-w-md lg:max-w-xs px-4 py-2 rounded-2xl ${msg.sender === 'user' ? 'bg-primary text-primary-foreground rounded-br-none' : 'bg-muted text-muted-foreground rounded-bl-none'}`}>
                   <p className="text-sm">{msg.text}</p>
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="flex items-end gap-2 justify-start">
-                  <div className={`max-w-xs px-4 py-2 rounded-2xl rounded-bl-none bg-gray-200 dark:bg-gray-700`}>
+                  <div className={`max-w-xs px-4 py-2 rounded-2xl rounded-bl-none bg-muted`}>
                       <div className="flex items-center space-x-1 rtl:space-x-reverse">
-                          <span className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-pulse" style={{animationDelay: '0.1s'}}></span>
-                          <span className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></span>
-                          <span className="w-2 h-2 bg-gray-400 dark:bg-gray-500 rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></span>
+                          <span className="w-2 h-2 bg-muted-foreground rounded-full animate-pulse" style={{animationDelay: '0.1s'}}></span>
+                          <span className="w-2 h-2 bg-muted-foreground rounded-full animate-pulse" style={{animationDelay: '0.2s'}}></span>
+                          <span className="w-2 h-2 bg-muted-foreground rounded-full animate-pulse" style={{animationDelay: '0.3s'}}></span>
                       </div>
                   </div>
               </div>
@@ -153,7 +153,7 @@ const Chatbox: React.FC = () => {
           </div>
         </div>
 
-        <form onSubmit={handleSendMessage} className="p-4 border-t border-gray-200 dark:border-gray-700">
+        <form onSubmit={handleSendMessage} className="p-4 border-t border-border">
           <div className="flex items-center space-x-2 rtl:space-x-reverse">
             <input
               type="text"
@@ -161,10 +161,10 @@ const Chatbox: React.FC = () => {
               onChange={(e) => setInputValue(e.target.value)}
               placeholder={t['chatbox.placeholder']}
               aria-label={t['chatbox.placeholder']}
-              className="flex-1 w-full bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-white px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-amber-500"
+              className="flex-1 w-full bg-muted text-foreground px-4 py-2 rounded-full focus:outline-none focus:ring-2 focus:ring-ring"
               disabled={isLoading}
             />
-            <button type="submit" disabled={isLoading || !inputValue.trim()} className="w-10 h-10 flex-shrink-0 bg-amber-500 text-black rounded-full flex items-center justify-center disabled:bg-gray-300 dark:disabled:bg-gray-600 disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-gray-900" aria-label={t['chatbox.send']}>
+            <button type="submit" disabled={isLoading || !inputValue.trim()} className="w-10 h-10 flex-shrink-0 bg-primary text-primary-foreground rounded-full flex items-center justify-center disabled:bg-muted disabled:text-muted-foreground disabled:cursor-not-allowed focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background" aria-label={t['chatbox.send']}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform rtl:rotate-180" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" /></svg>
             </button>
           </div>

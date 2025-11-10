@@ -5,13 +5,13 @@ import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 const FeatureCard: React.FC<{ icon: React.ReactNode; title: string; text: string }> = ({ icon, title, text }) => (
   <div className="flex items-start space-x-4 rtl:space-x-reverse">
     <div className="flex-shrink-0">
-      <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400">
+      <div className="flex items-center justify-center h-12 w-12 rounded-lg bg-primary/10 text-primary">
         {icon}
       </div>
     </div>
     <div>
-      <h3 className="text-lg font-bold text-gray-900 dark:text-white">{title}</h3>
-      <p className="mt-1 text-gray-600 dark:text-gray-400">{text}</p>
+      <h3 className="text-lg font-bold text-foreground">{title}</h3>
+      <p className="mt-1 text-muted-foreground">{text}</p>
     </div>
   </div>
 );
@@ -26,14 +26,14 @@ const About: React.FC = () => {
     <section 
       id="about" 
       ref={sectionRef} 
-      className={`py-20 md:py-32 bg-gray-50 dark:bg-[#111111] transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`py-20 md:py-32 bg-muted transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl lg:text-5xl tracking-tight">
+          <h2 className="text-3xl font-extrabold text-foreground sm:text-4xl lg:text-5xl tracking-tight">
             {t['about.title']}
           </h2>
-          <p className="mt-4 max-w-3xl mx-auto text-lg text-gray-600 dark:text-gray-400">
+          <p className="mt-4 max-w-3xl mx-auto text-lg text-muted-foreground">
             {t['about.description']}
           </p>
         </div>
@@ -41,7 +41,7 @@ const About: React.FC = () => {
         <div className="lg:grid lg:grid-cols-2 lg:gap-24 lg:items-center">
           <div className={`mt-10 lg:mt-0 ${locale === 'ar' ? 'lg:order-last' : ''}`} aria-hidden="true">
             <img 
-              className="rounded-lg shadow-2xl shadow-amber-500/5" 
+              className="rounded-lg shadow-2xl shadow-primary/5" 
               src="https://bozorgigroup.com/img/bozorgi%20group%20trading.jpg" 
               alt="Bozorgi Group Trading Team" 
             />

@@ -2,7 +2,7 @@ import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
 
 const SocialIcon: React.FC<{ href: string, path: string, label: string }> = ({ href, path, label }) => (
-  <a href={href} target="_blank" rel="noopener noreferrer" className="text-gray-500 dark:text-gray-400 hover:text-amber-600 dark:hover:text-amber-400 transition">
+  <a href={href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition">
     <span className="sr-only">{label}</span>
     <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
       <path d={path} />
@@ -13,21 +13,21 @@ const SocialIcon: React.FC<{ href: string, path: string, label: string }> = ({ h
 const Footer: React.FC = () => {
   const { t } = useLanguage();
   return (
-    <footer className="bg-gray-100 dark:bg-black border-t border-gray-200 dark:border-gray-800">
+    <footer className="bg-muted border-t border-border">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center md:text-start">
           {/* Column 1: Company Info */}
           <div className="space-y-4">
             <a href="#home" className="inline-block">
-               <img className="h-12 w-auto mx-auto md:mx-0" src="/images/logo-bozorgi.png" alt="Bozorgi Group Logo" />
+               <img className="h-12 w-auto mx-auto md:mx-0" src="/logo-bozorgi.png" alt="Bozorgi Group Logo" />
             </a>
-            <p className="text-gray-600 dark:text-gray-400 max-w-xs mx-auto md:mx-0">"{t['hero.motto']}"</p>
+            <p className="text-muted-foreground max-w-xs mx-auto md:mx-0">"{t['hero.motto']}"</p>
           </div>
 
           {/* Column 2: Location Map */}
           <div className="space-y-4">
-            <h3 className="text-lg font-semibold text-black dark:text-white uppercase tracking-wider">{t['footer.locationTitle']}</h3>
-            <div className="overflow-hidden rounded-lg border border-gray-300 dark:border-gray-700 h-48">
+            <h3 className="text-lg font-semibold text-foreground uppercase tracking-wider">{t['footer.locationTitle']}</h3>
+            <div className="overflow-hidden rounded-lg border border-border h-48">
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.493922652616!2d55.26385367538206!3d25.1865984777178!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f69eb6b3353c1%3A0x234910292534563a!2sAl%20Manara%20Tower%20-%20Business%20Bay%20-%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sus!4v1718826558485!5m2!1sen!2sus"
                 className="w-full h-full border-0"
@@ -41,7 +41,7 @@ const Footer: React.FC = () => {
 
           {/* Column 3: Social Media */}
           <div className="space-y-4 flex flex-col items-center md:items-start">
-             <h3 className="text-lg font-semibold text-black dark:text-white uppercase tracking-wider">{t['footer.followUs']}</h3>
+             <h3 className="text-lg font-semibold text-foreground uppercase tracking-wider">{t['footer.followUs']}</h3>
              <div className="flex justify-center md:justify-start space-x-6 rtl:space-x-reverse">
                 <SocialIcon 
                   href="https://www.facebook.com/AliBozorgiofficial/"
@@ -62,7 +62,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
         
-        <div className="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 text-center text-base text-gray-600 dark:text-gray-400">
+        <div className="mt-12 pt-8 border-t border-border text-center text-base text-muted-foreground">
           <p>&copy; {new Date().getFullYear()} Bozorgi Group. {t['footer.rights']}</p>
         </div>
       </div>
