@@ -62,6 +62,7 @@
     "chatbox.title": "Chatea con nosotros",
     "chatbox.placeholder": "Escribe un mensaje...",
     "chatbox.initialMessage": "¡Hola! ¿Cómo puedo ayudarte hoy con respecto a Bozorgi Group?",
+    "chatbox.cannedResponse": "Gracias por tu mensaje. Un representante estará contigo en breve.",
     "chatbox.typing": "Escribiendo...",
     "theme.title": "Tema",
     "theme.light": "Claro",

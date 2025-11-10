@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { GoogleGenAI, Chat } from '@google/genai';
 import { useLanguage } from '../context/LanguageContext';
 import type { ChatMessage } from '../types';
 
@@ -8,14 +7,11 @@ const Chatbox: React.FC = () => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const chatRef = useRef<Chat | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { t, locale } = useLanguage();
   const initialMessage = t['chatbox.initialMessage'];
 
   useEffect(() => {
-    // Reset the chat session when the language changes.
-    chatRef.current = null;
     if (initialMessage) {
       setMessages([
         { id: Date.now(), text: initialMessage, sender: 'bot' }
@@ -27,7 +23,7 @@ const Chatbox: React.FC = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
   
-  const handleSendMessage = async (e: React.FormEvent) => {
+  const handleSendMessage = (e: React.FormEvent) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
 
@@ -40,38 +36,16 @@ const Chatbox: React.FC = () => {
     setInputValue('');
     setIsLoading(true);
 
-    try {
-        let chat = chatRef.current;
-        if (!chat) {
-            const ai = new GoogleGenAI({ apiKey: process.env.API_KEY as string });
-            chat = ai.chats.create({
-                model: 'gemini-2.5-flash',
-                config: {
-                    systemInstruction: "You are a helpful and friendly customer support assistant for Bozorgi Group, a premier partner in building materials trading. Your motto is 'Business Without Boundary'. Be concise and professional. The user's current language is " + locale,
-                },
-            });
-            chatRef.current = chat;
-        }
-
-        const response = await chat.sendMessage({ message: inputValue });
-
+    // Simulate a bot response after a short delay
+    setTimeout(() => {
       const botMessage: ChatMessage = {
         id: Date.now() + 1,
-        text: response.text,
+        text: t['chatbox.cannedResponse'],
         sender: 'bot',
       };
       setMessages(prev => [...prev, botMessage]);
-    } catch (error) {
-      console.error('Error sending message to Gemini:', error);
-      const errorMessage: ChatMessage = {
-        id: Date.now() + 1,
-        text: 'Sorry, I am having trouble connecting. Please try again later.',
-        sender: 'bot',
-      };
-      setMessages(prev => [...prev, errorMessage]);
-    } finally {
       setIsLoading(false);
-    }
+    }, 1200);
   };
 
   return (
