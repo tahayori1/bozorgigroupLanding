@@ -47,11 +47,6 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     loading,
   };
 
-  // Prevent rendering children until the initial translations are loaded
-  if (loading && Object.keys(translations).length === 0) {
-    return null; 
-  }
-
   return (
     <LanguageContext.Provider value={contextValue}>
       {children}

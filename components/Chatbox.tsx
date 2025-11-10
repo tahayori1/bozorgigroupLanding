@@ -11,16 +11,17 @@ const Chatbox: React.FC = () => {
   const chatRef = useRef<Chat | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { t, locale } = useLanguage();
+  const initialMessage = t['chatbox.initialMessage'];
 
   useEffect(() => {
     // Reset the chat session when the language changes.
     chatRef.current = null;
-    if (t['chatbox.initialMessage']) {
+    if (initialMessage) {
       setMessages([
-        { id: Date.now(), text: t['chatbox.initialMessage'], sender: 'bot' }
+        { id: Date.now(), text: initialMessage, sender: 'bot' }
       ]);
     }
-  }, [locale, t]);
+  }, [locale, initialMessage]);
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
