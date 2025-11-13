@@ -1,10 +1,6 @@
 import React from 'react';
 import Hero from './Hero';
-import About from './About';
 import Departments from './Departments';
-import History from './Team';
-import Humanity from './Philosophy';
-import Contact from './Contact';
 import SEO from './SEO';
 
 const PageHome: React.FC = () => {
@@ -44,11 +40,7 @@ const PageHome: React.FC = () => {
         canonicalPath="/"
       />
       <Hero />
-      <About />
       <Departments />
-      <History />
-      <Humanity />
-      <Contact />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, ReactNode, useCallback, useEffect } from 'react';
 
-export type Page = 'home' | 'materials' | 'property' | 'it';
+export type Page = 'home' | 'materials' | 'property' | 'it' | 'about' | 'contact';
 
 interface NavigationContextType {
   currentPage: Page;
@@ -18,9 +18,21 @@ export const NavigationProvider: React.FC<{ children: ReactNode }> = ({ children
     try {
       const params = new URLSearchParams(window.location.search);
       const pageParam = params.get('page');
-      if (pageParam && ['home', 'materials', 'property', 'it'].includes(pageParam)) {
+      if (pageParam && ['home', 'materials', 'property', 'it', 'about', 'contact'].includes(pageParam)) {
         setCurrentPage(pageParam as Page);
       }
+      
+      // Handle initial hash scroll if present
+      if (window.location.hash) {
+        const id = window.location.hash.substring(1);
+        setTimeout(() => {
+          const element = document.getElementById(id);
+          element?.scrollIntoView({ behavior: 'smooth' });
+        }, 500);
+      } else {
+        window.scrollTo(0, 0);
+      }
+
     } catch (e) {
       console.warn('Could not read URL parameters:', e);
     }
@@ -33,6 +45,8 @@ export const NavigationProvider: React.FC<{ children: ReactNode }> = ({ children
     // Update URL without refreshing
     try {
       const newUrl = page === 'home' ? window.location.pathname : `?page=${page}`;
+      // Clear hash when changing pages unless handled specifically by the caller (which we don't have access to here)
+      // So basic behavior is clean URL
       window.history.pushState({ page }, '', newUrl);
     } catch (e) {
       // In sandboxed environments (like blob URLs), pushState might be blocked.
@@ -47,7 +61,7 @@ export const NavigationProvider: React.FC<{ children: ReactNode }> = ({ children
       try {
         const params = new URLSearchParams(window.location.search);
         const pageParam = params.get('page');
-        if (pageParam && ['home', 'materials', 'property', 'it'].includes(pageParam)) {
+        if (pageParam && ['home', 'materials', 'property', 'it', 'about', 'contact'].includes(pageParam)) {
           setCurrentPage(pageParam as Page);
         } else {
           setCurrentPage('home');

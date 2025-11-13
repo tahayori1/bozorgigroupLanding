@@ -12,8 +12,11 @@ const Header: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [themeDropdownOpen, setThemeDropdownOpen] = useState(false);
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
+  
   const langDropdownRef = useRef<HTMLDivElement>(null);
   const themeDropdownRef = useRef<HTMLDivElement>(null);
+  const aboutDropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +31,9 @@ const Header: React.FC = () => {
       if (themeDropdownRef.current && !themeDropdownRef.current.contains(event.target as Node)) {
         setThemeDropdownOpen(false);
       }
+      if (aboutDropdownRef.current && !aboutDropdownRef.current.contains(event.target as Node)) {
+        setAboutDropdownOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
 
@@ -39,33 +45,31 @@ const Header: React.FC = () => {
 
   const handleNavClick = (page: Page, sectionId?: string) => {
     setMobileMenuOpen(false);
-    
+    setAboutDropdownOpen(false);
+
     if (currentPage === page && sectionId) {
-      // Already on the page, just scroll
       const element = document.getElementById(sectionId);
       element?.scrollIntoView({ behavior: 'smooth' });
+      // Update hash for deep linking simulation
+      try {
+         window.history.replaceState(null, '', `#${sectionId}`);
+      } catch(e) { /* ignore */ }
     } else {
-      // Change page
       navigateTo(page);
-      // If there is a section ID, we need to wait for render then scroll (simple timeout for now)
       if (sectionId) {
+        // We need to wait for the page to render before scrolling
         setTimeout(() => {
           const element = document.getElementById(sectionId);
           element?.scrollIntoView({ behavior: 'smooth' });
-        }, 100);
+          try {
+             // Update hash to reflect section
+             const newUrl = `?page=${page}#${sectionId}`;
+             window.history.replaceState({ page }, '', newUrl);
+          } catch(e) { /* ignore */ }
+        }, 300);
       }
     }
   };
-
-  const navLinks = [
-    { labelKey: 'header.about', page: 'home' as Page, sectionId: 'about' },
-    { labelKey: 'header.products', page: 'materials' as Page },
-    { labelKey: 'header.property', page: 'property' as Page },
-    { labelKey: 'header.it', page: 'it' as Page },
-    { labelKey: 'header.history', page: 'home' as Page, sectionId: 'history' },
-    { labelKey: 'header.humanity', page: 'home' as Page, sectionId: 'humanity' },
-    { labelKey: 'header.contact', page: 'home' as Page, sectionId: 'contact' },
-  ];
 
   const languages = { en: 'English', es: 'Español', ar: 'العربية' };
   const themes = {
@@ -84,33 +88,84 @@ const Header: React.FC = () => {
     setThemeDropdownOpen(false);
   }
 
-  const renderNavLinks = () => (
-    <>
-      {navLinks.map((link, idx) => (
-        <button
-          key={idx}
-          onClick={() => handleNavClick(link.page, link.sectionId)}
-          className={`block md:inline-block px-2 lg:px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-ring transition duration-150 ease-in-out whitespace-nowrap ${
-             currentPage === link.page && !link.sectionId ? 'text-primary font-bold' : 'text-muted-foreground hover:text-foreground hover:bg-accent'
-          }`}
-        >
-          {t[link.labelKey]}
-        </button>
-      ))}
-    </>
-  );
-
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${ scrolled ? 'bg-background/95 backdrop-blur-lg shadow-lg border-b border-border' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${ scrolled ? 'bg-background/95 backdrop-blur-lg shadow-lg border-b border-border' : 'bg-background/50 backdrop-blur-sm'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <div className="flex-shrink-0 cursor-pointer" onClick={() => navigateTo('home')}>
+          <div className="flex-shrink-0 cursor-pointer" onClick={() => handleNavClick('home')}>
             <img className="h-12 w-auto" src="/logo-bozorgi.png" alt="Bozorgi Group Logo" />
           </div>
           <div className="hidden md:flex items-center">
             <nav className="ms-4 lg:ms-10 flex items-baseline space-x-1 lg:space-x-2 rtl:space-x-reverse">
-              {renderNavLinks()}
+              {/* Home */}
+              <button
+                  onClick={() => handleNavClick('home')}
+                  className={`px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out whitespace-nowrap ${currentPage === 'home' ? 'text-primary font-bold' : 'text-muted-foreground hover:text-foreground hover:bg-accent'}`}
+              >
+                  {t['header.home']}
+              </button>
+
+              {/* About Dropdown */}
+              <div className="relative" ref={aboutDropdownRef}>
+                <button 
+                  onClick={() => setAboutDropdownOpen(!aboutDropdownOpen)}
+                  onMouseEnter={() => setAboutDropdownOpen(true)}
+                  className={`flex items-center px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out whitespace-nowrap ${currentPage === 'about' ? 'text-primary font-bold' : 'text-muted-foreground hover:text-foreground hover:bg-accent'}`}
+                >
+                  {t['header.about']}
+                  <svg className="w-4 h-4 ms-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                {aboutDropdownOpen && (
+                    <div 
+                        className="absolute start-0 mt-1 w-48 bg-popover text-popover-foreground rounded-md shadow-lg py-1 ring-1 ring-black ring-opacity-5" 
+                        onMouseLeave={() => setAboutDropdownOpen(false)}
+                    >
+                        <button onClick={() => handleNavClick('about', 'about')} className="block w-full text-left px-4 py-2 text-sm hover:bg-accent">
+                            {t['header.aboutUs']}
+                        </button>
+                        <button onClick={() => handleNavClick('about', 'history')} className="block w-full text-left px-4 py-2 text-sm hover:bg-accent">
+                            {t['header.history']}
+                        </button>
+                        <button onClick={() => handleNavClick('about', 'humanity')} className="block w-full text-left px-4 py-2 text-sm hover:bg-accent">
+                            {t['header.humanity']}
+                        </button>
+                    </div>
+                )}
+              </div>
+
+              {/* Products */}
+              <button
+                  onClick={() => handleNavClick('materials')}
+                  className={`px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out whitespace-nowrap ${currentPage === 'materials' ? 'text-primary font-bold' : 'text-muted-foreground hover:text-foreground hover:bg-accent'}`}
+              >
+                  {t['header.products']}
+              </button>
+
+              {/* Property */}
+              <button
+                  onClick={() => handleNavClick('property')}
+                  className={`px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out whitespace-nowrap ${currentPage === 'property' ? 'text-primary font-bold' : 'text-muted-foreground hover:text-foreground hover:bg-accent'}`}
+              >
+                  {t['header.property']}
+              </button>
+
+              {/* IT */}
+              <button
+                  onClick={() => handleNavClick('it')}
+                  className={`px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out whitespace-nowrap ${currentPage === 'it' ? 'text-primary font-bold' : 'text-muted-foreground hover:text-foreground hover:bg-accent'}`}
+              >
+                  {t['header.it']}
+              </button>
+
+              {/* Contact */}
+              <button
+                  onClick={() => handleNavClick('contact')}
+                  className={`px-2 lg:px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out whitespace-nowrap ${currentPage === 'contact' ? 'text-primary font-bold' : 'text-muted-foreground hover:text-foreground hover:bg-accent'}`}
+              >
+                  {t['header.contact']}
+              </button>
             </nav>
+
             {/* Theme Switcher */}
             <div className="relative ms-2 lg:ms-4" ref={themeDropdownRef}>
               <button onClick={() => setThemeDropdownOpen(!themeDropdownOpen)} className="flex items-center p-2 rounded-md text-muted-foreground hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-haspopup="true" aria-expanded={themeDropdownOpen}>
@@ -155,22 +210,41 @@ const Header: React.FC = () => {
         </div>
       </div>
       {mobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-background border-b border-border shadow-xl animate-in slide-in-from-top-5 duration-200">
+        <div id="mobile-menu" className="md:hidden bg-background border-b border-border shadow-xl animate-in slide-in-from-top-5 duration-200 h-screen overflow-y-auto">
           <div className="px-4 pt-4 pb-2 space-y-1">
-            {navLinks.map((link, idx) => (
-                 <button
-                  key={idx}
-                  onClick={() => handleNavClick(link.page, link.sectionId)}
-                  className={`block w-full text-left px-3 py-3 rounded-md text-base font-medium focus:outline-none transition duration-150 ease-in-out ${
-                     currentPage === link.page && !link.sectionId ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:text-foreground hover:bg-accent'
-                  }`}
-                >
-                  {t[link.labelKey]}
+            <button onClick={() => handleNavClick('home')} className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent">
+                {t['header.home']}
+            </button>
+
+             {/* Mobile About Group */}
+            <div className="space-y-1 pl-3 border-l-2 border-border ml-3">
+                <div className="px-3 py-2 text-sm font-bold text-foreground uppercase">{t['header.about']}</div>
+                <button onClick={() => handleNavClick('about', 'about')} className="block w-full text-left px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-accent">
+                    {t['header.aboutUs']}
                 </button>
-            ))}
+                <button onClick={() => handleNavClick('about', 'history')} className="block w-full text-left px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-accent">
+                    {t['header.history']}
+                </button>
+                <button onClick={() => handleNavClick('about', 'humanity')} className="block w-full text-left px-3 py-2 rounded-md text-sm text-muted-foreground hover:bg-accent">
+                    {t['header.humanity']}
+                </button>
+            </div>
+
+            <button onClick={() => handleNavClick('materials')} className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent">
+                {t['header.products']}
+            </button>
+            <button onClick={() => handleNavClick('property')} className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent">
+                {t['header.property']}
+            </button>
+             <button onClick={() => handleNavClick('it')} className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent">
+                {t['header.it']}
+            </button>
+             <button onClick={() => handleNavClick('contact')} className="block w-full text-left px-3 py-3 rounded-md text-base font-medium text-muted-foreground hover:text-foreground hover:bg-accent">
+                {t['header.contact']}
+            </button>
           </div>
           
-          <div className="border-t border-border mt-2 pt-4 pb-6 px-6 space-y-6">
+          <div className="border-t border-border mt-2 pt-4 pb-20 px-6 space-y-6">
              {/* Theme Toggle */}
              <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-muted-foreground">{t['theme.title']}</span>

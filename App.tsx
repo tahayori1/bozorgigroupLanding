@@ -6,6 +6,8 @@ import PageHome from './components/PageHome';
 import PageMaterials from './components/PageMaterials';
 import PageProperty from './components/PageProperty';
 import PageIT from './components/PageIT';
+import PageAbout from './components/PageAbout';
+import PageContact from './components/PageContact';
 import { useLanguage } from './context/LanguageContext';
 import { useNavigation } from './context/NavigationContext';
 
@@ -26,6 +28,8 @@ const App: React.FC = () => {
         {currentPage === 'materials' && <PageMaterials />}
         {currentPage === 'property' && <PageProperty />}
         {currentPage === 'it' && <PageIT />}
+        {currentPage === 'about' && <PageAbout />}
+        {currentPage === 'contact' && <PageContact />}
       </main>
       <Footer />
       <Chatbox />
