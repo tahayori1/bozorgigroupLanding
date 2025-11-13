@@ -1,6 +1,7 @@
 import React from 'react';
 import PropertyConsulting from './PropertyConsulting';
 import Contact from './Contact';
+import Testimonials from './Testimonials';
 import { useLanguage } from '../context/LanguageContext';
 
 const PageProperty: React.FC = () => {
@@ -36,6 +37,7 @@ const PageProperty: React.FC = () => {
         </div>
       </section>
       
+      <Testimonials category="property" />
       <Contact />
     </>
   );

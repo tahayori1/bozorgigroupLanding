@@ -1,7 +1,9 @@
 import React from 'react';
 import WhyChooseUs from './WhyChooseUs';
+import MaterialsConsulting from './MaterialsConsulting';
 import Products from './Portfolio';
 import Contact from './Contact';
+import Testimonials from './Testimonials';
 import { useLanguage } from '../context/LanguageContext';
 
 const PageMaterials: React.FC = () => {
@@ -27,7 +29,9 @@ const PageMaterials: React.FC = () => {
       </section>
 
       <WhyChooseUs />
+      <MaterialsConsulting />
       <Products />
+      <Testimonials category="materials" />
       <Contact />
     </>
   );
