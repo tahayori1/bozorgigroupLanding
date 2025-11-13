@@ -14,10 +14,15 @@ export const NavigationProvider: React.FC<{ children: ReactNode }> = ({ children
 
   // Initial load: Check URL params
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const pageParam = params.get('page');
-    if (pageParam && ['home', 'materials', 'property', 'it'].includes(pageParam)) {
-      setCurrentPage(pageParam as Page);
+    // Wrap in try-catch as accessing location might be restricted in some environments
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const pageParam = params.get('page');
+      if (pageParam && ['home', 'materials', 'property', 'it'].includes(pageParam)) {
+        setCurrentPage(pageParam as Page);
+      }
+    } catch (e) {
+      console.warn('Could not read URL parameters:', e);
     }
   }, []);
 
@@ -26,19 +31,29 @@ export const NavigationProvider: React.FC<{ children: ReactNode }> = ({ children
     window.scrollTo({ top: 0, behavior: 'smooth' });
     
     // Update URL without refreshing
-    const newUrl = page === 'home' ? window.location.pathname : `?page=${page}`;
-    window.history.pushState({ page }, '', newUrl);
+    try {
+      const newUrl = page === 'home' ? window.location.pathname : `?page=${page}`;
+      window.history.pushState({ page }, '', newUrl);
+    } catch (e) {
+      // In sandboxed environments (like blob URLs), pushState might be blocked.
+      // We catch the error so the app doesn't crash, allowing navigation to still work via React state.
+      console.warn('Navigation URL update blocked by environment:', e);
+    }
   }, []);
 
   // Handle Back Button
   useEffect(() => {
     const handlePopState = (event: PopStateEvent) => {
-      const params = new URLSearchParams(window.location.search);
-      const pageParam = params.get('page');
-      if (pageParam && ['home', 'materials', 'property', 'it'].includes(pageParam)) {
-        setCurrentPage(pageParam as Page);
-      } else {
-        setCurrentPage('home');
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const pageParam = params.get('page');
+        if (pageParam && ['home', 'materials', 'property', 'it'].includes(pageParam)) {
+          setCurrentPage(pageParam as Page);
+        } else {
+          setCurrentPage('home');
+        }
+      } catch (e) {
+        console.warn('PopState handling blocked:', e);
       }
     };
 
