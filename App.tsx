@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
+import WhyChooseUs from './components/WhyChooseUs';
 import Products from './components/Portfolio';
 import History from './components/Team';
 import Humanity from './components/Philosophy';
@@ -24,6 +25,7 @@ const App: React.FC = () => {
       <main>
         <Hero />
         <About />
+        <WhyChooseUs />
         <Products />
         <History />
         <Humanity />
