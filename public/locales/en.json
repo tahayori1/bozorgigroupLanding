@@ -7,6 +7,9 @@
     "header.humanity": "Humanity",
     "header.contact": "Contact",
     "hero.subtitle": "Global Experts in Wood Sourcing, Property Consulting & IT Solutions",
+    "hero.materials.subtitle": "Sourcing the finest wood and building materials from around the globe for your architectural needs.",
+    "hero.property.subtitle": "Making intelligent real estate decisions with data-driven market analysis and expert consulting.",
+    "hero.it.subtitle": "Empowering your business with next-generation Artificial Intelligence and Digital Strategies.",
     "hero.motto": "Business Without Boundaries",
     "hero.scroll": "Discover More",
     "about.title": "About Bozorgi Group",
@@ -108,5 +111,7 @@
     "property.what.title": "Buy, Sell, or Rent",
     "property.what.desc": "Strategic advice on whether to buy, sell, or rent properties based on your goals.",
     "property.who.title": "Who",
-    "property.who.desc": "Connecting you with trusted partners, agents, and stakeholders you can rely on."
+    "property.who.desc": "Connecting you with trusted partners, agents, and stakeholders you can rely on.",
+    "property.strategy.title": "Our Strategic Approach",
+    "property.strategy.desc": "We don't just find properties; we analyze markets. Our deep understanding of local regulations in the Middle East and Europe allows us to guide you through complex transactions with ease, ensuring your investment is secure and profitable."
 }

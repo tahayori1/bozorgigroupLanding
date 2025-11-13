@@ -1,21 +1,17 @@
 import React, { useEffect } from 'react';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import About from './components/About';
-import Departments from './components/Departments';
-import WhyChooseUs from './components/WhyChooseUs';
-import PropertyConsulting from './components/PropertyConsulting';
-import ITSolutions from './components/ITSolutions';
-import Products from './components/Portfolio';
-import History from './components/Team';
-import Humanity from './components/Philosophy';
-import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Chatbox from './components/Chatbox';
+import PageHome from './components/PageHome';
+import PageMaterials from './components/PageMaterials';
+import PageProperty from './components/PageProperty';
+import PageIT from './components/PageIT';
 import { useLanguage } from './context/LanguageContext';
+import { useNavigation } from './context/NavigationContext';
 
 const App: React.FC = () => {
   const { locale } = useLanguage();
+  const { currentPage } = useNavigation();
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -23,28 +19,13 @@ const App: React.FC = () => {
   }, [locale]);
 
   return (
-    <div className="bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground">
+    <div className="bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground min-h-screen flex flex-col">
       <Header />
-      <main>
-        <Hero />
-        <About />
-        <Departments />
-        
-        {/* Wood / Materials Section */}
-        <WhyChooseUs />
-        <Products />
-        
-        {/* Property Section */}
-        <PropertyConsulting />
-        
-        {/* IT Section */}
-        <ITSolutions />
-        
-        {/* Company Soul & Legacy */}
-        <History />
-        <Humanity />
-        
-        <Contact />
+      <main className="flex-grow">
+        {currentPage === 'home' && <PageHome />}
+        {currentPage === 'materials' && <PageMaterials />}
+        {currentPage === 'property' && <PageProperty />}
+        {currentPage === 'it' && <PageIT />}
       </main>
       <Footer />
       <Chatbox />

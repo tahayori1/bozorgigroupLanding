@@ -7,6 +7,9 @@
     "header.humanity": "Humanidad",
     "header.contact": "Contacto",
     "hero.subtitle": "Expertos Globales en Abastecimiento de Madera, Consultoría Inmobiliaria y Soluciones IT",
+    "hero.materials.subtitle": "Abastecimiento de la mejor madera y materiales de construcción de todo el mundo para sus necesidades arquitectónicas.",
+    "hero.property.subtitle": "Tomando decisiones inmobiliarias inteligentes con análisis de mercado basado en datos y consultoría experta.",
+    "hero.it.subtitle": "Empoderando su negocio con Inteligencia Artificial y Estrategias Digitales de próxima generación.",
     "hero.motto": "Negocios Sin Fronteras",
     "hero.scroll": "Descubra Más",
     "about.title": "Sobre Bozorgi Group",
@@ -108,5 +111,7 @@
     "property.what.title": "Comprar, Vender o Alquilar",
     "property.what.desc": "Asesoramiento estratégico sobre si comprar, vender o alquilar propiedades según sus objetivos.",
     "property.who.title": "Quién",
-    "property.who.desc": "Conectándolo con socios, agentes y partes interesadas de confianza en los que puede confiar."
+    "property.who.desc": "Conectándolo con socios, agentes y partes interesadas de confianza en los que puede confiar.",
+    "property.strategy.title": "Nuestro Enfoque Estratégico",
+    "property.strategy.desc": "No solo encontramos propiedades; analizamos mercados. Nuestra profunda comprensión de las regulaciones locales en Oriente Medio y Europa nos permite guiarlo a través de transacciones complejas con facilidad, asegurando que su inversión sea segura y rentable."
 }

@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import { useTheme } from '../context/ThemeContext';
+import { useNavigation, Page } from '../context/NavigationContext';
 import type { Theme } from '../context/ThemeContext';
 
 const Header: React.FC = () => {
   const { locale, setLocale, t } = useLanguage();
   const { theme, setTheme } = useTheme();
+  const { currentPage, navigateTo } = useNavigation();
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
@@ -35,14 +37,34 @@ const Header: React.FC = () => {
     };
   }, []);
 
+  const handleNavClick = (page: Page, sectionId?: string) => {
+    setMobileMenuOpen(false);
+    
+    if (currentPage === page && sectionId) {
+      // Already on the page, just scroll
+      const element = document.getElementById(sectionId);
+      element?.scrollIntoView({ behavior: 'smooth' });
+    } else {
+      // Change page
+      navigateTo(page);
+      // If there is a section ID, we need to wait for render then scroll (simple timeout for now)
+      if (sectionId) {
+        setTimeout(() => {
+          const element = document.getElementById(sectionId);
+          element?.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+  };
+
   const navLinks = [
-    { href: '#about', labelKey: 'header.about' },
-    { href: '#why-us', labelKey: 'header.products' }, // Links to the start of the Wood/Materials section
-    { href: '#property-consulting', labelKey: 'header.property' },
-    { href: '#it-solutions', labelKey: 'header.it' },
-    { href: '#history', labelKey: 'header.history' },
-    { href: '#humanity', labelKey: 'header.humanity' },
-    { href: '#contact', labelKey: 'header.contact' },
+    { labelKey: 'header.about', page: 'home' as Page, sectionId: 'about' },
+    { labelKey: 'header.products', page: 'materials' as Page },
+    { labelKey: 'header.property', page: 'property' as Page },
+    { labelKey: 'header.it', page: 'it' as Page },
+    { labelKey: 'header.history', page: 'home' as Page, sectionId: 'history' },
+    { labelKey: 'header.humanity', page: 'home' as Page, sectionId: 'humanity' },
+    { labelKey: 'header.contact', page: 'home' as Page, sectionId: 'contact' },
   ];
 
   const languages = { en: 'English', es: 'Español', ar: 'العربية' };
@@ -64,23 +86,26 @@ const Header: React.FC = () => {
 
   const renderNavLinks = () => (
     <>
-      {navLinks.map((link) => (
-        <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)}
-          className="block md:inline-block px-2 lg:px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ring transition duration-150 ease-in-out whitespace-nowrap">
+      {navLinks.map((link, idx) => (
+        <button
+          key={idx}
+          onClick={() => handleNavClick(link.page, link.sectionId)}
+          className={`block md:inline-block px-2 lg:px-3 py-2 rounded-md text-sm font-medium focus:outline-none focus-visible:ring-2 focus-visible:ring-ring transition duration-150 ease-in-out whitespace-nowrap ${
+             currentPage === link.page && !link.sectionId ? 'text-primary font-bold' : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+          }`}
+        >
           {t[link.labelKey]}
-        </a>
+        </button>
       ))}
     </>
   );
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${ scrolled ? 'bg-background/80 backdrop-blur-lg shadow-lg border-b border-border' : 'bg-transparent'}`}>
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${ scrolled ? 'bg-background/95 backdrop-blur-lg shadow-lg border-b border-border' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          <div className="flex-shrink-0">
-            <a href="#home" className="focus:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-sm">
-              <img className="h-12 w-auto" src="/logo-bozorgi.png" alt="Bozorgi Group Logo" />
-            </a>
+          <div className="flex-shrink-0 cursor-pointer" onClick={() => navigateTo('home')}>
+            <img className="h-12 w-auto" src="/logo-bozorgi.png" alt="Bozorgi Group Logo" />
           </div>
           <div className="hidden md:flex items-center">
             <nav className="ms-4 lg:ms-10 flex items-baseline space-x-1 lg:space-x-2 rtl:space-x-reverse">

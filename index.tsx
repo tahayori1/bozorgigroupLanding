@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import { LanguageProvider } from './context/LanguageContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { NavigationProvider } from './context/NavigationContext';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -14,7 +15,9 @@ root.render(
   <React.StrictMode>
     <LanguageProvider>
       <ThemeProvider>
-        <App />
+        <NavigationProvider>
+          <App />
+        </NavigationProvider>
       </ThemeProvider>
     </LanguageProvider>
   </React.StrictMode>
