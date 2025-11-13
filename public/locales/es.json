@@ -1,4 +1,12 @@
 {
+    "seo.home.title": "Inicio",
+    "seo.home.desc": "Bozorgi Group es un conglomerado especializado en materiales de construcción, consultoría inmobiliaria y soluciones de TI. Alcance global, experiencia local.",
+    "seo.materials.title": "Materiales de Construcción",
+    "seo.materials.desc": "Abastecimiento experto de MDF, HDF, madera contrachapada y madera dura. Consultoría en selección, plazos y logística para proyectos globales.",
+    "seo.property.title": "Consultoría Inmobiliaria",
+    "seo.property.desc": "Asesoramiento inmobiliario estratégico para comprar, vender o alquilar en Oriente Medio y Europa. Maximice su ROI con orientación experta.",
+    "seo.it.title": "Soluciones TI e IA",
+    "seo.it.desc": "Automatice su negocio con marketing impulsado por IA, embudos de ventas y CRM. Aumente la eficiencia y los ingresos en 10 veces.",
     "header.about": "Sobre Nosotros",
     "header.products": "Materiales",
     "header.property": "Inmobiliaria",

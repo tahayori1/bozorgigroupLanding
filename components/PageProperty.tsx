@@ -3,11 +3,32 @@ import PropertyConsulting from './PropertyConsulting';
 import Contact from './Contact';
 import Testimonials from './Testimonials';
 import { useLanguage } from '../context/LanguageContext';
+import SEO from './SEO';
 
 const PageProperty: React.FC = () => {
   const { t } = useLanguage();
+
+  const propertySchema = {
+    "@type": "RealEstateAgent",
+    "name": "Bozorgi Group Property Consulting",
+    "image": "https://bozorgigroup.com/logo-bozorgi.png",
+    "description": "Expert real estate investment consulting for buying, selling, and renting properties in the Middle East and Europe.",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Dubai",
+        "addressCountry": "AE"
+    },
+    "priceRange": "$$$"
+  };
+
   return (
     <>
+        <SEO 
+          titleKey="seo.property.title" 
+          descriptionKey="seo.property.desc" 
+          schema={propertySchema} 
+          canonicalPath="/?page=property"
+        />
         {/* Specific Hero for Property */}
         <section className="relative h-[60vh] flex items-center justify-center text-center text-white overflow-hidden">
             <div

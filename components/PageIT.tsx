@@ -3,6 +3,7 @@ import Contact from './Contact';
 import Testimonials from './Testimonials';
 import { useLanguage } from '../context/LanguageContext';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import SEO from './SEO';
 
 const AnimatedSection: React.FC<{ children: React.ReactNode, className?: string, delay?: string }> = ({ children, className = "", delay = "0ms" }) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -33,6 +34,24 @@ const PageIT: React.FC = () => {
     setFormState({ name: '', phone: '', email: '', product: '', message: '' });
   };
 
+  const itSchema = {
+    "@type": "SoftwareApplication",
+    "name": "Tahayori Automation System",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+      "description": "Free Consultation Available"
+    },
+    "featureList": [
+      "Customer Acquisition Automation",
+      "Sales Funnel Automation",
+      "AI Ad Optimization"
+    ]
+  };
+
   const metrics = [
     { value: '×10', labelKey: 'it.stats.success' },
     { value: '×3', labelKey: 'it.stats.sales' },
@@ -52,6 +71,12 @@ const PageIT: React.FC = () => {
 
   return (
     <div className="bg-background text-foreground overflow-x-hidden">
+      <SEO 
+        titleKey="seo.it.title" 
+        descriptionKey="seo.it.desc" 
+        schema={itSchema} 
+        canonicalPath="/?page=it"
+      />
       {/* 1. HERO SECTION */}
       <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-slate-900 text-white">
         {/* Background Effects */}

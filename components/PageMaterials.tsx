@@ -5,11 +5,39 @@ import Products from './Portfolio';
 import Contact from './Contact';
 import Testimonials from './Testimonials';
 import { useLanguage } from '../context/LanguageContext';
+import SEO from './SEO';
 
 const PageMaterials: React.FC = () => {
   const { t } = useLanguage();
+
+  const materialsSchema = {
+    "@type": "Service",
+    "serviceType": "Building Materials Consulting and Sourcing",
+    "provider": {
+      "@type": "Corporation",
+      "name": "Bozorgi Group"
+    },
+    "areaServed": "Global",
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Wood and Building Materials",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "MDF" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "HDF" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Plywood" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Hardwood" } }
+      ]
+    }
+  };
+
   return (
     <>
+      <SEO 
+        titleKey="seo.materials.title" 
+        descriptionKey="seo.materials.desc" 
+        schema={materialsSchema} 
+        canonicalPath="/?page=materials"
+      />
       {/* Specific Hero for Materials */}
       <section className="relative h-[60vh] flex items-center justify-center text-center text-white overflow-hidden">
         <div
