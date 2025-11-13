@@ -3,6 +3,15 @@ import { useLanguage } from '../context/LanguageContext';
 
 const Hero: React.FC = () => {
   const { t } = useLanguage();
+  
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    const element = document.getElementById('departments');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center text-center text-white overflow-hidden">
       <div
@@ -23,7 +32,7 @@ const Hero: React.FC = () => {
         </p>
       </div>
        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce z-10">
-        <a href="#about" aria-label={t['hero.scroll']}>
+        <a href="#departments" onClick={handleScroll} aria-label={t['hero.scroll']}>
           <svg className="w-8 h-8 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
             <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
           </svg>
