@@ -155,9 +155,54 @@ const Header: React.FC = () => {
         </div>
       </div>
       {mobileMenuOpen && (
-        <div id="mobile-menu" className="md:hidden bg-background border-b border-border">
-          <div className="px-2 pt-2 pb-3 sm:px-3 space-y-1">
-            {renderNavLinks()}
+        <div id="mobile-menu" className="md:hidden bg-background border-b border-border shadow-xl animate-in slide-in-from-top-5 duration-200">
+          <div className="px-4 pt-4 pb-2 space-y-1">
+            {navLinks.map((link, idx) => (
+                 <button
+                  key={idx}
+                  onClick={() => handleNavClick(link.page, link.sectionId)}
+                  className={`block w-full text-left px-3 py-3 rounded-md text-base font-medium focus:outline-none transition duration-150 ease-in-out ${
+                     currentPage === link.page && !link.sectionId ? 'bg-primary/10 text-primary' : 'text-muted-foreground hover:text-foreground hover:bg-accent'
+                  }`}
+                >
+                  {t[link.labelKey]}
+                </button>
+            ))}
+          </div>
+          
+          <div className="border-t border-border mt-2 pt-4 pb-6 px-6 space-y-6">
+             {/* Theme Toggle */}
+             <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-muted-foreground">{t['theme.title']}</span>
+                <div className="flex bg-muted/50 p-1 rounded-lg">
+                  {Object.entries(themes).map(([key, value]) => (
+                     <button
+                        key={key}
+                        onClick={() => setTheme(key as Theme)}
+                        className={`p-2 rounded-md transition-all duration-200 ${theme === key ? 'bg-background text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+                        aria-label={value.name}
+                     >
+                        {value.icon}
+                     </button>
+                  ))}
+                </div>
+             </div>
+
+             {/* Language Toggle */}
+             <div className="flex items-center justify-between">
+                <span className="text-sm font-medium text-muted-foreground">{t['header.language']}</span>
+                <div className="flex gap-2">
+                   {Object.entries(languages).map(([key, name]) => (
+                      <button 
+                        key={key}
+                        onClick={() => handleLocaleChange(key as 'en' | 'es' | 'ar')}
+                        className={`px-3 py-1.5 text-xs font-bold rounded-md border transition-colors ${locale === key ? 'bg-primary border-primary text-primary-foreground' : 'border-border text-muted-foreground hover:border-primary/50'}`}
+                      >
+                        {key.toUpperCase()}
+                      </button>
+                   ))}
+                </div>
+             </div>
           </div>
         </div>
       )}
