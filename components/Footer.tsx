@@ -1,5 +1,6 @@
 import React from 'react';
 import { useLanguage } from '../context/LanguageContext';
+import { useNavigation } from '../context/NavigationContext';
 
 const SocialIcon: React.FC<{ href: string, path: string, label: string }> = ({ href, path, label }) => (
   <a href={href} target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition">
@@ -12,19 +13,34 @@ const SocialIcon: React.FC<{ href: string, path: string, label: string }> = ({ h
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
+  const { navigateTo } = useNavigation();
+
   return (
     <footer className="bg-muted border-t border-border">
       <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 text-center md:text-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center md:text-start">
           {/* Column 1: Company Info */}
           <div className="space-y-4">
-            <a href="#home" className="inline-block">
+            <button onClick={() => navigateTo('home')} className="inline-block">
                <img className="h-12 w-auto mx-auto md:mx-0" src="/logo-bozorgi.png" alt="Bozorgi Group Logo" />
-            </a>
+            </button>
             <p className="text-muted-foreground max-w-xs mx-auto md:mx-0">"{t['hero.motto']}"</p>
           </div>
 
-          {/* Column 2: Location Map */}
+          {/* Column 2: Quick Links */}
+          <div className="space-y-4">
+             <h3 className="text-lg font-semibold text-foreground uppercase tracking-wider">{t['footer.links']}</h3>
+             <ul className="space-y-2">
+                <li><button onClick={() => navigateTo('home')} className="text-muted-foreground hover:text-primary transition-colors">{t['header.home']}</button></li>
+                <li><button onClick={() => navigateTo('about')} className="text-muted-foreground hover:text-primary transition-colors">{t['header.aboutUs']}</button></li>
+                <li><button onClick={() => navigateTo('materials')} className="text-muted-foreground hover:text-primary transition-colors">{t['header.products']}</button></li>
+                <li><button onClick={() => navigateTo('property')} className="text-muted-foreground hover:text-primary transition-colors">{t['header.property']}</button></li>
+                <li><button onClick={() => navigateTo('it')} className="text-muted-foreground hover:text-primary transition-colors">{t['header.it']}</button></li>
+                <li><button onClick={() => navigateTo('contact')} className="text-muted-foreground hover:text-primary transition-colors">{t['header.contact']}</button></li>
+             </ul>
+          </div>
+
+          {/* Column 3: Location Map */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-foreground uppercase tracking-wider">{t['footer.locationTitle']}</h3>
             <div className="overflow-hidden rounded-lg border border-border h-48">
@@ -39,7 +55,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Column 3: Social Media */}
+          {/* Column 4: Social Media */}
           <div className="space-y-4 flex flex-col items-center md:items-start">
              <h3 className="text-lg font-semibold text-foreground uppercase tracking-wider">{t['footer.followUs']}</h3>
              <div className="flex justify-center md:justify-start space-x-6 rtl:space-x-reverse">
