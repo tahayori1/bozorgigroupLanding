@@ -37,7 +37,9 @@ const Header: React.FC = () => {
 
   const navLinks = [
     { href: '#about', labelKey: 'header.about' },
-    { href: '#products', labelKey: 'header.products' },
+    { href: '#why-us', labelKey: 'header.products' }, // Links to the start of the Wood/Materials section
+    { href: '#property-consulting', labelKey: 'header.property' },
+    { href: '#it-solutions', labelKey: 'header.it' },
     { href: '#history', labelKey: 'header.history' },
     { href: '#humanity', labelKey: 'header.humanity' },
     { href: '#contact', labelKey: 'header.contact' },
@@ -64,7 +66,7 @@ const Header: React.FC = () => {
     <>
       {navLinks.map((link) => (
         <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)}
-          className="block md:inline-block px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ring transition duration-150 ease-in-out">
+          className="block md:inline-block px-2 lg:px-3 py-2 rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ring transition duration-150 ease-in-out whitespace-nowrap">
           {t[link.labelKey]}
         </a>
       ))}
@@ -81,11 +83,11 @@ const Header: React.FC = () => {
             </a>
           </div>
           <div className="hidden md:flex items-center">
-            <nav className="ms-10 flex items-baseline space-x-4 rtl:space-x-reverse">
+            <nav className="ms-4 lg:ms-10 flex items-baseline space-x-1 lg:space-x-2 rtl:space-x-reverse">
               {renderNavLinks()}
             </nav>
             {/* Theme Switcher */}
-            <div className="relative ms-4" ref={themeDropdownRef}>
+            <div className="relative ms-2 lg:ms-4" ref={themeDropdownRef}>
               <button onClick={() => setThemeDropdownOpen(!themeDropdownOpen)} className="flex items-center p-2 rounded-md text-muted-foreground hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-haspopup="true" aria-expanded={themeDropdownOpen}>
                 {themes[theme].icon}
                 <svg className="w-4 h-4 ms-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>
@@ -101,7 +103,7 @@ const Header: React.FC = () => {
               )}
             </div>
             {/* Language Switcher */}
-            <div className="relative ms-4" ref={langDropdownRef}>
+            <div className="relative ms-2 lg:ms-4" ref={langDropdownRef}>
               <button onClick={() => setLangDropdownOpen(!langDropdownOpen)} className="flex items-center p-2 rounded-md text-muted-foreground hover:bg-accent focus:outline-none focus-visible:ring-2 focus-visible:ring-ring" aria-haspopup="true" aria-expanded={langDropdownOpen}>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2"><path strokeLinecap="round" strokeLinejoin="round" d="M3 5h12M9 3v2m0 14v2m-6 0h12a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2zM15 9h-2a2 2 0 00-2 2v2a2 2 0 002 2h2m-2-4h2m-4 0V9m0 4v2" /></svg>
                 <svg className="w-4 h-4 ms-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path></svg>

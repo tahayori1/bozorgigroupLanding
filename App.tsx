@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import About from './components/About';
+import Departments from './components/Departments';
 import WhyChooseUs from './components/WhyChooseUs';
+import PropertyConsulting from './components/PropertyConsulting';
+import ITSolutions from './components/ITSolutions';
 import Products from './components/Portfolio';
 import History from './components/Team';
 import Humanity from './components/Philosophy';
@@ -25,10 +28,22 @@ const App: React.FC = () => {
       <main>
         <Hero />
         <About />
+        <Departments />
+        
+        {/* Wood / Materials Section */}
         <WhyChooseUs />
         <Products />
+        
+        {/* Property Section */}
+        <PropertyConsulting />
+        
+        {/* IT Section */}
+        <ITSolutions />
+        
+        {/* Company Soul & Legacy */}
         <History />
         <Humanity />
+        
         <Contact />
       </main>
       <Footer />
