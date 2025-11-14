@@ -2,7 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useLanguage } from '../context/LanguageContext';
 import type { ChatMessage } from '../types';
 
-const Chatbox: React.FC = () => {
+interface ChatboxProps {
+  isHidden: boolean;
+}
+
+const Chatbox: React.FC<ChatboxProps> = ({ isHidden }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputValue, setInputValue] = useState('');
@@ -23,6 +27,13 @@ const Chatbox: React.FC = () => {
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
+  
+  // Close chat window if parent component requests it to be hidden (e.g. mobile menu opens)
+  useEffect(() => {
+    if (isHidden) {
+      setIsOpen(false);
+    }
+  }, [isHidden]);
 
   // Focus trapping for accessibility
   useEffect(() => {
@@ -94,13 +105,14 @@ const Chatbox: React.FC = () => {
 
   return (
     <>
-      <div className={`fixed bottom-5 transition-all duration-300 z-50 ${locale === 'ar' ? 'left-5' : 'right-5'}`}>
+      <div className={`fixed bottom-5 transition-all duration-300 z-50 ${locale === 'ar' ? 'left-5' : 'right-5'} ${isHidden ? 'opacity-0 scale-75 pointer-events-none' : ''}`}>
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-primary-foreground shadow-lg hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background transform transition-transform hover:scale-110"
           aria-label={t['chatbox.title']}
           aria-expanded={isOpen}
           aria-controls="chatbox-window"
+          tabIndex={isHidden ? -1 : 0}
         >
           {isOpen ? (
              <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>

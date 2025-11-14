@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Chatbox from './components/Chatbox';
@@ -14,6 +14,7 @@ import { useNavigation } from './context/NavigationContext';
 const App: React.FC = () => {
   const { locale } = useLanguage();
   const { currentPage } = useNavigation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     document.documentElement.lang = locale;
@@ -22,7 +23,7 @@ const App: React.FC = () => {
 
   return (
     <div className="bg-background text-foreground font-sans selection:bg-primary selection:text-primary-foreground min-h-screen flex flex-col">
-      <Header />
+      <Header mobileMenuOpen={mobileMenuOpen} setMobileMenuOpen={setMobileMenuOpen} />
       <main className="flex-grow">
         {currentPage === 'home' && <PageHome />}
         {currentPage === 'materials' && <PageMaterials />}
@@ -32,7 +33,7 @@ const App: React.FC = () => {
         {currentPage === 'contact' && <PageContact />}
       </main>
       <Footer />
-      <Chatbox />
+      <Chatbox isHidden={mobileMenuOpen} />
     </div>
   );
 };

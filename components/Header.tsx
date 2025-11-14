@@ -4,12 +4,16 @@ import { useTheme } from '../context/ThemeContext';
 import { useNavigation, Page } from '../context/NavigationContext';
 import type { Theme } from '../context/ThemeContext';
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  mobileMenuOpen: boolean;
+  setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, setMobileMenuOpen }) => {
   const { locale, setLocale, t } = useLanguage();
   const { theme, setTheme } = useTheme();
   const { currentPage, navigateTo } = useNavigation();
   const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [themeDropdownOpen, setThemeDropdownOpen] = useState(false);
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false);
