@@ -4,6 +4,7 @@ import Testimonials from './Testimonials';
 import { useLanguage } from '../context/LanguageContext';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import SEO from './SEO';
+import ITLead from './ITLead';
 
 const AnimatedSection: React.FC<{ children: React.ReactNode, className?: string, delay?: string }> = ({ children, className = "", delay = "0ms" }) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -220,10 +221,13 @@ const PageIT: React.FC = () => {
         </div>
       </section>
 
-      {/* 5. TESTIMONIALS */}
+      {/* 5. IT LEAD PROFILE */}
+      <ITLead />
+
+      {/* 6. TESTIMONIALS */}
       <Testimonials category="it" />
 
-      {/* 6. LEAD FORM */}
+      {/* 7. LEAD FORM */}
       <section className="py-20 bg-slate-900 text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 shadow-2xl">
