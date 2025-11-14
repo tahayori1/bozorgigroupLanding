@@ -19,26 +19,31 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
 
   useEffect(() => {
     const fetchTranslations = async () => {
-      setLoading(true);
-      try {
-        // In this environment, we can reference the public directory directly.
-        const response = await fetch(`/locales/${locale}.json`);
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        setLoading(true);
+        const sections = ['common', 'seo', 'home', 'about', 'materials', 'property', 'it', 'contact', 'testimonials'];
+        try {
+            const promises = sections.map(section =>
+                fetch(`/locales/${locale}/${section}.json`).then(res => {
+                    if (!res.ok) {
+                        throw new Error(`Failed to load ${section}.json for ${locale}`);
+                    }
+                    return res.json();
+                })
+            );
+
+            const results = await Promise.all(promises);
+            const combinedTranslations = results.reduce((acc, current) => ({ ...acc, ...current }), {});
+            setTranslations(combinedTranslations);
+        } catch (error) {
+            console.error('Could not load translations:', error);
+            setTranslations({});
+        } finally {
+            setLoading(false);
         }
-        const data = await response.json();
-        setTranslations(data);
-      } catch (error) {
-        console.error('Could not load translations:', error);
-        // Fallback to an empty object or handle error appropriately
-        setTranslations({});
-      } finally {
-        setLoading(false);
-      }
     };
 
     fetchTranslations();
-  }, [locale]);
+}, [locale]);
   
   const contextValue = {
     locale,

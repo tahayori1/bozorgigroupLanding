@@ -1,5 +1,6 @@
 import React from 'react';
 import PropertyConsulting from './PropertyConsulting';
+import PrivateClientServices from './PrivateClientServices';
 import Contact from './Contact';
 import Testimonials from './Testimonials';
 import { useLanguage } from '../context/LanguageContext';
@@ -50,13 +51,26 @@ const PageProperty: React.FC = () => {
       <PropertyConsulting />
       
       <section className="py-20 bg-background text-foreground">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h3 className="text-2xl font-bold mb-6">{t['property.strategy.title']}</h3>
-            <p className="text-muted-foreground text-lg leading-relaxed">
-                {t['property.strategy.desc']}
-            </p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <h3 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{t['property.strategy.title']}</h3>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                    {t['property.strategy.desc']}
+                </p>
+              </div>
+              <div>
+                <img 
+                  src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Strategic property planning" 
+                  className="rounded-lg shadow-xl w-full h-auto object-cover"
+                />
+              </div>
+            </div>
         </div>
       </section>
+
+      <PrivateClientServices />
       
       <Testimonials category="property" />
       <Contact />
