@@ -31,7 +31,7 @@ const ITLead: React.FC = () => {
           {/* Left Column: Profile Pic & Info */}
           <div className="lg:col-span-1 text-center flex flex-col items-center">
             <img 
-              src="https://bozorgigroup.com/img/Farzin-Tahayori.jpg" 
+              src="https://cdn.bozorgigroup.com/img/Farzin-Tahayori.jpg" 
               alt={t['it.lead.name']} 
               className="w-40 h-40 rounded-full object-cover mb-4 border-4 border-primary shadow-lg"
             />

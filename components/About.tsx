@@ -42,7 +42,7 @@ const About: React.FC = () => {
           <div className={`mt-10 lg:mt-0 ${locale === 'ar' ? 'lg:order-last' : ''}`} aria-hidden="true">
             <img 
               className="rounded-lg shadow-2xl shadow-primary/5" 
-              src="https://bozorgigroup.com/img/bozorgi%20group%20trading.jpg" 
+              src="https://cdn.bozorgigroup.com/img/bozorgi%20group%20trading.jpg" 
               alt="Bozorgi Group Trading Team" 
             />
           </div>

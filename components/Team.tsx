@@ -4,11 +4,11 @@ import { useLanguage } from '../context/LanguageContext';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 const familyData: FamilyMember[] = [
-  { generation: 5, nameKey: 'family.gen5.name', titleKey: 'family.gen5.title', imageUrl: 'https://bozorgigroup.com/img/bozorg%20bozorgi.gif', descriptionKey: 'family.gen5.description' },
-  { generation: 4, nameKey: 'family.gen4.name', titleKey: 'family.gen4.title', imageUrl: 'https://bozorgigroup.com/img/Asghar%20Bozorgi.jpg', descriptionKey: 'family.gen4.description' },
-  { generation: 3, nameKey: 'family.gen3.name', titleKey: 'family.gen3.title', imageUrl: 'https://bozorgigroup.com/img/MuhammadAli%20Bozorgi.jpeg', descriptionKey: 'family.gen3.description' },
-  { generation: 2, nameKey: 'family.gen2.name', titleKey: 'family.gen2.title', imageUrl: 'https://bozorgigroup.com/img/ali%20bozorgi.jpg', descriptionKey: 'family.gen2.description' },
-  { generation: 1, nameKey: 'family.gen1.name', titleKey: 'family.gen1.title', imageUrl: 'https://bozorgigroup.com/img/ali%20asghar%20bozorgi.jpeg', descriptionKey: 'family.gen1.description' },
+  { generation: 5, nameKey: 'family.gen5.name', titleKey: 'family.gen5.title', imageUrl: 'https://cdn.bozorgigroup.com/img/bozorg%20bozorgi.gif', descriptionKey: 'family.gen5.description' },
+  { generation: 4, nameKey: 'family.gen4.name', titleKey: 'family.gen4.title', imageUrl: 'https://cdn.bozorgigroup.com/img/Asghar%20Bozorgi.jpg', descriptionKey: 'family.gen4.description' },
+  { generation: 3, nameKey: 'family.gen3.name', titleKey: 'family.gen3.title', imageUrl: 'https://cdn.bozorgigroup.com/img/MuhammadAli%20Bozorgi.jpeg', descriptionKey: 'family.gen3.description' },
+  { generation: 2, nameKey: 'family.gen2.name', titleKey: 'family.gen2.title', imageUrl: 'https://cdn.bozorgigroup.com/img/ali%20bozorgi.jpg', descriptionKey: 'family.gen2.description' },
+  { generation: 1, nameKey: 'family.gen1.name', titleKey: 'family.gen1.title', imageUrl: 'https://cdn.bozorgigroup.com/img/ali%20asghar%20bozorgi.jpeg', descriptionKey: 'family.gen1.description' },
 ];
 
 const HistoryCard: React.FC<{ member: FamilyMember, isRightAligned: boolean }> = ({ member, isRightAligned }) => {

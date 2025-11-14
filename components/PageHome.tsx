@@ -8,7 +8,7 @@ const PageHome: React.FC = () => {
     "@type": "Corporation",
     "name": "Bozorgi Group",
     "url": "https://bozorgigroup.com",
-    "logo": "https://bozorgigroup.com/images/logo-bozorgi.png",
+    "logo": "https://cdn.bozorgigroup.com/img/aabozorgi.png",
     "foundingDate": "1988",
     "description": "A multi-faceted conglomerate specializing in Building Materials, Property Consulting, and IT Solutions.",
     "contactPoint": {

@@ -12,7 +12,7 @@ const PageProperty: React.FC = () => {
   const propertySchema = {
     "@type": "RealEstateAgent",
     "name": "Bozorgi Group Property Consulting",
-    "image": "https://bozorgigroup.com/images/logo-bozorgi.png",
+    "image": "https://cdn.bozorgigroup.com/img/aabozorgi.png",
     "description": "Expert real estate investment consulting for buying, selling, and renting properties in the Middle East and Europe.",
     "address": {
         "@type": "PostalAddress",

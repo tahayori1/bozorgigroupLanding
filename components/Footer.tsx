@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
           {/* Column 1: Company Info */}
           <div className="space-y-4">
             <button onClick={() => navigateTo('home')} className="inline-block">
-               <img className="h-12 w-auto mx-auto md:mx-0" src="/images/logobozorgi.png" alt="Bozorgi Group Logo" />
+               <img className="h-12 w-auto mx-auto md:mx-0" src="https://cdn.bozorgigroup.com/img/aabozorgi.png" alt="Bozorgi Group Logo" />
             </button>
             <p className="text-muted-foreground max-w-xs mx-auto md:mx-0">"{t['hero.motto']}"</p>
           </div>

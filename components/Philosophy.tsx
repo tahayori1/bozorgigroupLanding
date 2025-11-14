@@ -25,7 +25,7 @@ const Humanity: React.FC = () => {
 
         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
           <div className="space-y-4">
-            <img src="https://bozorgigroup.com/img/bozorgi-group-abualisina.net.jpg" alt="Abu-Ali Sina Hospital" className="rounded-lg shadow-lg w-full h-auto object-cover"/>
+            <img src="https://cdn.bozorgigroup.com/img/bozorgi-group-abualisina.net.jpg" alt="Abu-Ali Sina Hospital" className="rounded-lg shadow-lg w-full h-auto object-cover"/>
             <h3 className="text-2xl font-bold text-primary">{t['humanity.hospitalTitle']}</h3>
             <p className="text-muted-foreground">{t['humanity.hospitalText']}</p>
             <a href="https://en.abualisina.net" target="_blank" rel="noopener noreferrer" className="inline-block text-primary font-semibold hover:text-primary/80 transition">
@@ -33,7 +33,7 @@ const Humanity: React.FC = () => {
             </a>
           </div>
           <div className="space-y-4">
-            <img src="https://bozorgigroup.com/img/bozorgiHighSchool2.jpg" alt="Mohammad Ali Bozorgi Highschool" className="rounded-lg shadow-lg w-full h-auto object-cover"/>
+            <img src="https://cdn.bozorgigroup.com/img/bozorgiHighSchool2.jpg" alt="Mohammad Ali Bozorgi Highschool" className="rounded-lg shadow-lg w-full h-auto object-cover"/>
             <h3 className="text-2xl font-bold text-primary">{t['humanity.schoolTitle']}</h3>
             <p className="text-muted-foreground">{t['humanity.schoolText']}</p>
           </div>

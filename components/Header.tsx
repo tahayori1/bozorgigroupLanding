@@ -97,7 +97,7 @@ const Header: React.FC<HeaderProps> = ({ mobileMenuOpen, setMobileMenuOpen }) =>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           <div className="flex-shrink-0 cursor-pointer" onClick={() => handleNavClick('home')}>
-            <img className="h-12 w-auto" src="/images/logobozorgi.png" alt="Bozorgi Group Logo" />
+            <img className="h-12 w-auto" src="https://cdn.bozorgigroup.com/img/aabozorgi.png" alt="Bozorgi Group Logo" />
           </div>
           <div className="hidden md:flex items-center">
             <nav className="ms-4 lg:ms-10 flex items-baseline space-x-1 lg:space-x-2 rtl:space-x-reverse">

@@ -4,13 +4,13 @@ import { useLanguage } from '../context/LanguageContext';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 
 const productsData: Product[] = [
-  { nameKey: 'products.mdf.name', imageUrl: 'https://bozorgigroup.com/img/mdf-bozorgi-scaled.jpg', descriptionKey: 'products.mdf.description' },
-  { nameKey: 'products.hdf.name', imageUrl: 'https://bozorgigroup.com/img/hdf-ali-bozorgi.png', descriptionKey: 'products.hdf.description' },
-  { nameKey: 'products.plywood.name', imageUrl: 'https://bozorgigroup.com/img/alibozorgi-plywood.jpg', descriptionKey: 'products.plywood.description' },
-  { nameKey: 'products.hardwood.name', imageUrl: 'https://bozorgigroup.com/img/ali-bozorgi-hardwood-scaled.jpg', descriptionKey: 'products.hardwood.description' },
-  { nameKey: 'products.chipboard.name', imageUrl: 'https://bozorgigroup.com/img/ali-bozorgi-chipboard-scaled.jpeg', descriptionKey: 'products.chipboard.description' },
-  { nameKey: 'products.hpl.name', imageUrl: 'https://bozorgigroup.com/img/Decorative_laminate_HPL.jpg', descriptionKey: 'products.hpl.description' },
-  { nameKey: 'products.veneer.name', imageUrl: 'https://bozorgigroup.com/img/ali-bozorgi-veneer-scaled.jpg', descriptionKey: 'products.veneer.description' },
+  { nameKey: 'products.mdf.name', imageUrl: 'https://cdn.bozorgigroup.com/img/mdf-bozorgi-scaled.jpg', descriptionKey: 'products.mdf.description' },
+  { nameKey: 'products.hdf.name', imageUrl: 'https://cdn.bozorgigroup.com/img/hdf-ali-bozorgi.png', descriptionKey: 'products.hdf.description' },
+  { nameKey: 'products.plywood.name', imageUrl: 'https://cdn.bozorgigroup.com/img/alibozorgi-plywood.jpg', descriptionKey: 'products.plywood.description' },
+  { nameKey: 'products.hardwood.name', imageUrl: 'https://cdn.bozorgigroup.com/img/ali-bozorgi-hardwood-scaled.jpg', descriptionKey: 'products.hardwood.description' },
+  { nameKey: 'products.chipboard.name', imageUrl: 'https://cdn.bozorgigroup.com/img/ali-bozorgi-chipboard-scaled.jpeg', descriptionKey: 'products.chipboard.description' },
+  { nameKey: 'products.hpl.name', imageUrl: 'https://cdn.bozorgigroup.com/img/Decorative_laminate_HPL.jpg', descriptionKey: 'products.hpl.description' },
+  { nameKey: 'products.veneer.name', imageUrl: 'https://cdn.bozorgigroup.com/img/ali-bozorgi-veneer-scaled.jpg', descriptionKey: 'products.veneer.description' },
 ];
 
 const Products: React.FC = () => {
