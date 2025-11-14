@@ -6,7 +6,7 @@ type Category = 'materials' | 'property' | 'it';
 
 interface TestimonialData {
   id: number;
-  name: string;
+  nameKey: string;
   roleKey: string;
   quoteKey: string;
   image: string;
@@ -16,21 +16,21 @@ const testimonialsMap: Record<Category, TestimonialData[]> = {
   materials: [
     {
       id: 1,
-      name: "Carlos Rodriguez",
+      nameKey: "testimonials.materials.name1",
       roleKey: "testimonials.materials.role1",
       quoteKey: "testimonials.materials.quote1",
       image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop"
     },
     {
       id: 2,
-      name: "Sarah Chen",
+      nameKey: "testimonials.materials.name2",
       roleKey: "testimonials.materials.role2",
       quoteKey: "testimonials.materials.quote2",
       image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=1888&auto=format&fit=crop"
     },
     {
       id: 3,
-      name: "Ahmed Al-Mansouri",
+      nameKey: "testimonials.materials.name3",
       roleKey: "testimonials.materials.role3",
       quoteKey: "testimonials.materials.quote3",
       image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=1887&auto=format&fit=crop"
@@ -39,21 +39,21 @@ const testimonialsMap: Record<Category, TestimonialData[]> = {
   property: [
     {
       id: 1,
-      name: "Elena Moretti",
+      nameKey: "testimonials.property.name1",
       roleKey: "testimonials.property.role1",
       quoteKey: "testimonials.property.quote1",
       image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1961&auto=format&fit=crop"
     },
     {
       id: 2,
-      name: "James Wilson",
+      nameKey: "testimonials.property.name2",
       roleKey: "testimonials.property.role2",
       quoteKey: "testimonials.property.quote2",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=2070&auto=format&fit=crop"
     },
     {
       id: 3,
-      name: "Fatima Khalid",
+      nameKey: "testimonials.property.name3",
       roleKey: "testimonials.property.role3",
       quoteKey: "testimonials.property.quote3",
       image: "https://images.unsplash.com/photo-1567532939604-b6b5b0db2604?q=80&w=1887&auto=format&fit=crop"
@@ -62,21 +62,21 @@ const testimonialsMap: Record<Category, TestimonialData[]> = {
   it: [
     {
       id: 1,
-      name: "Reza Mohammadi",
+      nameKey: "testimonials.it.name1",
       roleKey: "testimonials.it.role1",
       quoteKey: "testimonials.it.quote1",
       image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=1887&auto=format&fit=crop"
     },
     {
       id: 2,
-      name: "Sarah Ahmadi",
+      nameKey: "testimonials.it.name2",
       roleKey: "testimonials.it.role2",
       quoteKey: "testimonials.it.quote2",
       image: "https://images.unsplash.com/photo-1589156280159-27698a70f29e?q=80&w=1886&auto=format&fit=crop"
     },
     {
       id: 3,
-      name: "Mahdi Karimi",
+      nameKey: "testimonials.it.name3",
       roleKey: "testimonials.it.role3",
       quoteKey: "testimonials.it.quote3",
       image: "https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=2070&auto=format&fit=crop"
@@ -128,11 +128,11 @@ const Testimonials: React.FC<TestimonialsProps> = ({ category }) => {
               <div className="flex items-center mt-auto pt-6 border-t border-border/50">
                 <img 
                     src={item.image} 
-                    alt={item.name} 
+                    alt={t[item.nameKey]} 
                     className="w-12 h-12 rounded-full object-cover mr-4 border-2 border-primary/50"
                 />
                 <div>
-                    <h4 className="font-bold text-foreground">{item.name}</h4>
+                    <h4 className="font-bold text-foreground">{t[item.nameKey]}</h4>
                     <p className="text-sm text-primary font-medium">{t[item.roleKey]}</p>
                 </div>
               </div>
