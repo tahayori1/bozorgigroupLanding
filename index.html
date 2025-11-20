@@ -33,6 +33,60 @@
         darkMode: 'class',
         theme: {
           extend: {
+            animation: {
+              'fade-in': 'fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'fade-in-down': 'fadeInDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'zoom-in': 'zoomIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'slide-in-right': 'slideInRight 0.5s ease-out forwards',
+              'slide-in-left': 'slideInLeft 0.5s ease-out forwards',
+              'bounce-slow': 'bounce 3s infinite',
+              'float': 'float 6s ease-in-out infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'blob': 'blob 7s infinite',
+              'spin-slow': 'spin 12s linear infinite',
+              'shimmer': 'shimmer 2.5s linear infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              fadeInUp: {
+                '0%': { opacity: '0', transform: 'translateY(30px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              fadeInDown: {
+                '0%': { opacity: '0', transform: 'translateY(-20px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              zoomIn: {
+                '0%': { opacity: '0', transform: 'scale(0.95)' },
+                '100%': { opacity: '1', transform: 'scale(1)' },
+              },
+              slideInRight: {
+                '0%': { transform: 'translateX(100%)', opacity: '0' },
+                '100%': { transform: 'translateX(0)', opacity: '1' },
+              },
+              slideInLeft: {
+                '0%': { transform: 'translateX(-100%)', opacity: '0' },
+                '100%': { transform: 'translateX(0)', opacity: '1' },
+              },
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              blob: {
+                '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                '100%': { transform: 'translate(0px, 0px) scale(1)' },
+              },
+              shimmer: {
+                '0%': { backgroundPosition: '200% 0' },
+                '100%': { backgroundPosition: '-200% 0' }
+              }
+            },
             colors: {
               border: 'hsl(var(--border))',
               input: 'hsl(var(--input))',
@@ -74,7 +128,7 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       :root {
         --background: 0, 0%, 100%;
@@ -83,11 +137,11 @@
         --card-foreground: 222.2, 84%, 4.9%;
         --popover: 0, 0%, 100%;
         --popover-foreground: 222.2, 84%, 4.9%;
-        --primary: 38, 92%, 50%;
+        --primary: 35, 90%, 45%; 
         --primary-foreground: 48, 96%, 98%;
         --secondary: 210, 40%, 96.1%;
         --secondary-foreground: 222.2, 47.4%, 11.2%;
-        --muted: 210, 40%, 96.1%;
+        --muted: 210, 40%, 98%;
         --muted-foreground: 215.4, 16.3%, 46.9%;
         --accent: 210, 40%, 96.1%;
         --accent-foreground: 222.2, 47.4%, 11.2%;
@@ -95,57 +149,37 @@
         --destructive-foreground: 210, 40%, 98%;
         --border: 214.3, 31.8%, 91.4%;
         --input: 214.3, 31.8%, 91.4%;
-        --ring: 38, 92%, 50%;
+        --ring: 35, 90%, 45%;
+        --radius: 0.5rem;
       }
- 
       .dark {
-        --background: 240, 10%, 3.9%;
+        --background: 222.2, 84%, 4.9%;
         --foreground: 210, 40%, 98%;
-        --card: 240, 10%, 3.9%;
+        --card: 222.2, 84%, 6.9%;
         --card-foreground: 210, 40%, 98%;
-        --popover: 240, 10%, 3.9%;
+        --popover: 222.2, 84%, 4.9%;
         --popover-foreground: 210, 40%, 98%;
-        --primary: 48, 96%, 59%;
+        --primary: 38, 92%, 50%;
         --primary-foreground: 48, 96%, 98%;
         --secondary: 217.2, 32.6%, 17.5%;
         --secondary-foreground: 210, 40%, 98%;
-        --muted: 220, 14%, 10%;
-        --muted-foreground: 215, 20%, 65%;
+        --muted: 217.2, 32.6%, 17.5%;
+        --muted-foreground: 215, 20.2%, 65.1%;
         --accent: 217.2, 32.6%, 17.5%;
         --accent-foreground: 210, 40%, 98%;
         --destructive: 0, 62.8%, 30.6%;
         --destructive-foreground: 210, 40%, 98%;
         --border: 217.2, 32.6%, 17.5%;
         --input: 217.2, 32.6%, 17.5%;
-        --ring: 48, 96%, 59%;
+        --ring: 38, 92%, 50%;
       }
-
-      html {
-        scroll-padding-top: 80px; /* Height of fixed header */
-      }
-
       body {
-        font-family: 'Inter', sans-serif;
-        background-color: hsl(var(--background));
-        color: hsl(var(--foreground));
-      }
-      
-      /* Respect user preference for reduced motion */
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
-        }
+        font-feature-settings: "rlig" 1, "calt" 1;
       }
     </style>
   <script type="importmap">
 {
   "imports": {
-    "@google/genai": "https://aistudiocdn.com/google-genai@0.14.0/index.js",
     "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
     "react/": "https://aistudiocdn.com/react@^19.2.0/"
@@ -153,7 +187,7 @@
 }
 </script>
 </head>
-  <body>
+  <body class="antialiased overflow-x-hidden">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

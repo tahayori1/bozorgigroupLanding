@@ -88,6 +88,18 @@ interface TestimonialsProps {
   category: Category;
 }
 
+const StarIcon = ({ filled }: { filled: boolean }) => (
+    <svg className={`w-4 h-4 ${filled ? 'text-yellow-400' : 'text-gray-200 dark:text-gray-700'}`} fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+    </svg>
+);
+
+const QuoteMarkIcon = () => (
+    <svg className="w-8 h-8 text-primary/20" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true">
+        <path d="M10 8c-3.3 0-6 2.7-6 6v10h10V14H6c0-2.2 1.8-4 4-4V8zM26 8c-3.3 0-6 2.7-6 6v10h10V14h-8c0-2.2 1.8-4 4-4V8z" />
+    </svg>
+);
+
 const Testimonials: React.FC<TestimonialsProps> = ({ category }) => {
   const { t } = useLanguage();
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -97,44 +109,56 @@ const Testimonials: React.FC<TestimonialsProps> = ({ category }) => {
   return (
     <section 
       ref={sectionRef}
-      className={`py-20 bg-background text-foreground transition-all duration-1000 ease-in-out border-t border-border ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`py-24 bg-gradient-to-b from-background to-secondary/20 transition-all duration-1000 ease-in-out border-t border-border/30 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl mb-4">
-            {t['testimonials.title']}
+          <span className="text-primary font-bold tracking-wider uppercase text-sm mb-2 block">{t['testimonials.title']}</span>
+          <h2 className="text-3xl md:text-4xl font-extrabold tracking-tight mb-4 text-foreground">
+             Success Stories
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto font-light">
             {t[`testimonials.${category}.subtitle`]}
           </p>
         </div>
 
+        {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {data.map((item) => (
-            <div key={item.id} className="bg-card p-8 rounded-2xl shadow-lg border border-border relative flex flex-col">
-              {/* Quote Icon */}
-              <div className="absolute top-6 right-8 text-primary/20">
-                <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14.017 21L14.017 18C14.017 16.8954 14.9124 16 16.017 16H19.017C19.5693 16 20.017 15.5523 20.017 15V9C20.017 8.44772 19.5693 8 19.017 8H15.017C14.4647 8 14.017 8.44772 14.017 9V11C14.017 11.5523 13.5693 12 13.017 12H12.017V5H22.017V15C22.017 18.3137 19.3307 21 16.017 21H14.017ZM5.01697 21L5.01697 18C5.01697 16.8954 5.9124 16 7.01697 16H10.017C10.5693 16 11.017 15.5523 11.017 15V9C11.017 8.44772 10.5693 8 10.017 8H6.01697C5.46468 8 5.01697 8.44772 5.01697 9V11C5.01697 11.5523 4.56925 12 4.01697 12H3.01697V5H13.017V15C13.017 18.3137 10.3307 21 7.01697 21H5.01697Z" />
-                </svg>
+          {data.map((item, index) => (
+            <div 
+                key={item.id} 
+                className="relative flex flex-col bg-card border border-border rounded-2xl p-8 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                style={{ transitionDelay: `${index * 150}ms` }}
+            >
+              {/* Decorative Quote Mark */}
+              <div className="absolute top-6 right-6 opacity-50 group-hover:opacity-100 group-hover:scale-110 transition-all duration-300">
+                  <QuoteMarkIcon />
               </div>
 
-              <div className="flex-grow mb-6 relative z-10">
-                <p className="text-muted-foreground italic text-lg leading-relaxed">
-                    "{t[item.quoteKey]}"
-                </p>
+              {/* Stars */}
+              <div className="flex gap-1 mb-6">
+                  {[1,2,3,4,5].map(n => <StarIcon key={n} filled={true} />)}
               </div>
 
-              <div className="flex items-center mt-auto pt-6 border-t border-border/50">
-                <img 
+              {/* Quote */}
+              <blockquote className="flex-grow mb-8">
+                  <p className="text-lg text-foreground/80 leading-relaxed font-medium italic">
+                      "{t[item.quoteKey]}"
+                  </p>
+              </blockquote>
+
+              {/* Author */}
+              <div className="flex items-center pt-6 border-t border-border/50 mt-auto">
+                  <img 
                     src={item.image} 
-                    alt={t[item.nameKey]} 
-                    className="w-12 h-12 rounded-full object-cover mr-4 border-2 border-primary/50"
-                />
-                <div>
-                    <h4 className="font-bold text-foreground">{t[item.nameKey]}</h4>
-                    <p className="text-sm text-primary font-medium">{t[item.roleKey]}</p>
-                </div>
+                    alt={t[item.nameKey]}
+                    className="w-12 h-12 rounded-full object-cover ring-2 ring-background shadow-sm mr-4"
+                  />
+                  <div>
+                      <div className="font-bold text-foreground text-base">{t[item.nameKey]}</div>
+                      <div className="text-xs font-semibold text-primary uppercase tracking-wide">{t[item.roleKey]}</div>
+                  </div>
               </div>
             </div>
           ))}

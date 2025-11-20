@@ -38,27 +38,39 @@ const PageMaterials: React.FC = () => {
         schema={materialsSchema} 
         canonicalPath="/?page=materials"
       />
-      {/* Specific Hero for Materials */}
-      <section className="relative h-[60vh] flex items-center justify-center text-center text-white overflow-hidden">
+      
+      {/* Finsa-style Architectural Hero */}
+      <section className="relative h-[85vh] flex items-end justify-start overflow-hidden group">
+        {/* Background Image with subtle zoom effect */}
         <div
-            className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
+            className="absolute top-0 left-0 w-full h-full bg-cover bg-center transition-transform duration-[10s] ease-in-out group-hover:scale-105"
             style={{ backgroundImage: "url('https://images.unsplash.com/photo-1585314062604-1a357de8b000?q=80&w=2071&auto=format&fit=crop')" }}
             aria-hidden="true"
         ></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60" aria-hidden="true"></div>
-        <div className="relative z-10 p-8 max-w-4xl mx-auto animate-fadeIn">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4">
-            {t['departments.materials.title']}
-            </h1>
-            <p className="text-lg md:text-xl max-w-2xl mx-auto text-gray-200">
-            {t['hero.materials.subtitle']}
-            </p>
+        
+        {/* Gradient Overlay - minimal and clean */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-90" aria-hidden="true"></div>
+        
+        {/* Content - Bottom Left Alignment for Architectural feel */}
+        <div className="relative z-10 p-8 md:p-16 max-w-7xl w-full mx-auto">
+            <div className="border-l-4 border-primary pl-6 md:pl-10 animate-fade-in-up">
+                <span className="block text-primary font-mono text-sm tracking-[0.3em] uppercase mb-4">
+                    Global Sourcing
+                </span>
+                <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tighter text-white mb-6 leading-none">
+                    {t['departments.materials.title']}
+                </h1>
+                <p className="text-xl md:text-2xl max-w-2xl text-gray-300 font-light leading-relaxed">
+                    {t['hero.materials.subtitle']}
+                </p>
+            </div>
         </div>
       </section>
 
-      <WhyChooseUs />
-      <MaterialsConsulting />
+      {/* Sections ordered for narrative flow: Portfolio (Visual) -> Consulting (Process) -> Why Us (Trust) */}
       <Products />
+      <MaterialsConsulting />
+      <WhyChooseUs />
       <Testimonials category="materials" />
       <Contact />
     </>

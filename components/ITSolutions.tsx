@@ -13,7 +13,7 @@ const ITSolutions: React.FC = () => {
       descKey: 'it.ai.desc',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
         </svg>
       )
     },
@@ -22,8 +22,7 @@ const ITSolutions: React.FC = () => {
       descKey: 'it.automation.desc',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
         </svg>
       )
     },
@@ -32,8 +31,7 @@ const ITSolutions: React.FC = () => {
       descKey: 'it.marketing.desc',
       icon: (
         <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z" />
+           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
         </svg>
       )
     }
@@ -43,26 +41,27 @@ const ITSolutions: React.FC = () => {
     <section 
       id="it-solutions" 
       ref={sectionRef} 
-      className={`py-20 md:py-32 bg-muted transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`py-28 bg-muted transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div className="order-2 lg:order-1">
-            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl mb-4 text-foreground">
+            <div className="inline-block px-4 py-1 rounded-full bg-primary/10 text-primary text-sm font-bold uppercase tracking-wider mb-6">Innovation Lab</div>
+            <h2 className="text-3xl font-extrabold tracking-tight sm:text-5xl mb-6 text-foreground leading-tight">
               {t['it.title']}
             </h2>
-            <p className="text-xl text-muted-foreground mb-8">
+            <p className="text-xl text-muted-foreground mb-12 leading-relaxed">
               {t['it.subtitle']}
             </p>
             
-            <div className="space-y-8">
+            <div className="space-y-6">
               {services.map((service, idx) => (
-                <div key={idx} className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                <div key={idx} className="flex items-start gap-6 p-6 bg-background rounded-2xl border border-border/50 shadow-sm hover:shadow-xl transition-all duration-300 group hover:border-primary/30 transform hover:-translate-x-[-5px]">
+                  <div className="flex-shrink-0 w-16 h-16 bg-gradient-to-br from-primary to-yellow-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-primary/20 transform group-hover:rotate-6 transition-transform duration-300">
                     {service.icon}
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-foreground">{t[service.titleKey]}</h3>
+                    <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">{t[service.titleKey]}</h3>
                     <p className="mt-2 text-muted-foreground leading-relaxed">{t[service.descKey]}</p>
                   </div>
                 </div>
@@ -70,13 +69,23 @@ const ITSolutions: React.FC = () => {
             </div>
           </div>
           
-          <div className="order-1 lg:order-2 relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-purple-500/20 rounded-2xl transform rotate-3 scale-105 blur-lg opacity-70"></div>
-            <img 
-              src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" 
-              alt="AI and Technology" 
-              className="relative rounded-2xl shadow-2xl border border-border w-full h-auto object-cover"
-            />
+          <div className="order-1 lg:order-2 relative perspective-1000 group">
+            <div className="absolute inset-0 bg-gradient-to-tr from-primary to-purple-600 rounded-3xl transform rotate-6 scale-95 opacity-20 blur-2xl group-hover:opacity-40 transition-opacity duration-700 animate-pulse-slow"></div>
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white/20 transform transition-transform duration-700 group-hover:rotate-1 group-hover:scale-[1.02]">
+                <img 
+                src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" 
+                alt="AI and Technology" 
+                className="w-full h-auto object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                <div className="absolute bottom-8 left-8 right-8 text-white">
+                    <div className="flex items-center gap-2 mb-2">
+                        <div className="w-2 h-2 bg-green-400 rounded-full animate-ping"></div>
+                        <span className="text-sm font-mono text-green-300">SYSTEM ONLINE</span>
+                    </div>
+                    <p className="font-mono text-sm opacity-80">Processing automated workflows...</p>
+                </div>
+            </div>
           </div>
         </div>
       </div>

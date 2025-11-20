@@ -10,7 +10,8 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [theme, setThemeState] = useState<Theme>('auto');
+  // Default to light theme for improved UI experience
+  const [theme, setThemeState] = useState<Theme>('light');
 
   const applyTheme = useCallback((themeToApply: Theme) => {
     const root = window.document.documentElement;
@@ -23,7 +24,7 @@ export const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) =
   
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as Theme | null;
-    const initialTheme = savedTheme || 'auto';
+    const initialTheme = savedTheme || 'light';
     setThemeState(initialTheme);
     applyTheme(initialTheme);
   }, [applyTheme]);
