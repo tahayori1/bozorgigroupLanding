@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import PropertyConsulting from './PropertyConsulting';
 import PrivateClientServices from './PrivateClientServices';
 import Contact from './Contact';
 import Testimonials from './Testimonials';
 import { useLanguage } from '../context/LanguageContext';
+import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import SEO from './SEO';
 
 const PageProperty: React.FC = () => {
   const { t } = useLanguage();
+  const heroRef = useRef<HTMLDivElement>(null);
+  const isHeroVisible = useIntersectionObserver(heroRef, { triggerOnce: true });
 
   const propertySchema = {
     "@type": "RealEstateAgent",
@@ -23,63 +26,100 @@ const PageProperty: React.FC = () => {
   };
 
   return (
-    <>
+    <div className="bg-white text-zinc-900 selection:bg-zinc-900 selection:text-white">
         <SEO 
           titleKey="seo.property.title" 
           descriptionKey="seo.property.desc" 
           schema={propertySchema} 
           canonicalPath="/?page=property"
         />
-        {/* Specific Hero for Property - Light Theme */}
-        <section className="relative h-[70vh] flex items-center justify-center text-center text-slate-900 overflow-hidden bg-white">
-            <div
-                className="absolute top-0 left-0 w-full h-full bg-cover bg-center"
-                style={{ backgroundImage: "url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?q=80&w=1973&auto=format&fit=crop')" }}
-                aria-hidden="true"
-            ></div>
-            {/* Light Overlay with Blur */}
-            <div className="absolute top-0 left-0 w-full h-full bg-white/75 backdrop-blur-[2px]" aria-hidden="true"></div>
+
+        {/* 1. HERO: Minimalist & Typographic */}
+        <section ref={heroRef} className="relative min-h-[85vh] flex flex-col justify-center pt-32 pb-20 border-b border-zinc-100 overflow-hidden">
+             {/* Subtle Texture Background */}
+             <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1486325212027-8081e485255e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-[0.03] grayscale mix-blend-multiply pointer-events-none"></div>
             
-            <div className="relative z-10 p-8 max-w-5xl mx-auto animate-fadeIn">
-                <div className="inline-block mb-4 px-3 py-1 border border-slate-400 rounded-full text-xs font-semibold tracking-widest uppercase text-slate-500">
-                    Real Estate & Investment
-                </div>
-                <h1 className="text-5xl md:text-7xl font-bold tracking-tighter mb-6 text-slate-900 drop-shadow-sm">
-                  {t['departments.property.title']}
-                </h1>
-                <p className="text-xl md:text-2xl max-w-3xl mx-auto text-slate-600 font-light leading-relaxed">
-                  {t['hero.property.subtitle']}
-                </p>
+            <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full transition-all duration-1000 ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+                 <div className="inline-block mb-8 px-4 py-1.5 border border-zinc-900 rounded-full">
+                    <span className="text-xs font-mono uppercase tracking-widest font-bold">Bozorgi Real Estate</span>
+                 </div>
+                 
+                 <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-zinc-900 leading-[0.9] mb-12">
+                    PRECISE.<br/>
+                    PROFITABLE.<br/>
+                    PRIVATE.
+                 </h1>
+
+                 <div className="grid md:grid-cols-12 gap-12 items-end">
+                    <div className="md:col-span-6 lg:col-span-5">
+                         <p className="text-xl md:text-2xl text-zinc-500 font-light leading-relaxed border-l-2 border-zinc-900 pl-6">
+                             {t['hero.property.subtitle']}
+                         </p>
+                    </div>
+                    <div className="md:col-span-6 lg:col-span-7 flex justify-start md:justify-end pb-2">
+                        <a href="#consulting" className="group inline-flex items-center gap-4 text-sm font-bold uppercase tracking-widest hover:text-zinc-600 transition-colors">
+                            Explore Services
+                            <span className="w-12 h-px bg-zinc-900 group-hover:w-20 transition-all duration-300"></span>
+                        </a>
+                    </div>
+                 </div>
             </div>
         </section>
 
-      <PropertyConsulting />
-      
-      <section className="py-20 bg-background text-foreground">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div className="space-y-6">
-                <h3 className="text-3xl font-extrabold tracking-tight sm:text-4xl">{t['property.strategy.title']}</h3>
-                <p className="text-muted-foreground text-lg leading-relaxed">
-                    {t['property.strategy.desc']}
-                </p>
-              </div>
-              <div>
-                <img 
-                  src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Strategic property planning" 
-                  className="rounded-lg shadow-xl w-full h-auto object-cover"
-                />
-              </div>
-            </div>
+        {/* 2. CONSULTING GRID */}
+        <div id="consulting">
+             <PropertyConsulting />
         </div>
-      </section>
 
-      <PrivateClientServices />
-      
-      <Testimonials category="property" />
-      <Contact />
-    </>
+        {/* 3. STRATEGIC APPROACH: Split Screen */}
+        <section className="py-0 bg-zinc-50 border-y border-zinc-200">
+             <div className="grid lg:grid-cols-2">
+                <div className="relative h-[50vh] lg:h-auto bg-zinc-200 overflow-hidden grayscale">
+                     <img 
+                        src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" 
+                        alt="Architecture" 
+                        className="object-cover w-full h-full hover:scale-105 transition-transform duration-[2s]" 
+                     />
+                     <div className="absolute inset-0 bg-zinc-900/10"></div>
+                </div>
+                <div className="p-12 md:p-24 flex flex-col justify-center">
+                     <h2 className="text-4xl md:text-6xl font-bold tracking-tighter leading-none mb-8">
+                         MARKET<br/>INTELLIGENCE
+                     </h2>
+                     <p className="text-lg text-zinc-600 font-light leading-relaxed mb-12">
+                        {t['property.strategy.desc']}
+                     </p>
+                     
+                     <div className="space-y-6">
+                        <div className="flex items-center gap-4 group">
+                            <div className="w-12 h-12 border border-zinc-200 flex items-center justify-center group-hover:bg-zinc-900 group-hover:border-zinc-900 transition-colors">
+                                <span className="text-lg font-bold group-hover:text-white">01</span>
+                            </div>
+                            <span className="text-zinc-800 font-medium uppercase tracking-wide">Data-Driven Valuation</span>
+                        </div>
+                        <div className="flex items-center gap-4 group">
+                            <div className="w-12 h-12 border border-zinc-200 flex items-center justify-center group-hover:bg-zinc-900 group-hover:border-zinc-900 transition-colors">
+                                <span className="text-lg font-bold group-hover:text-white">02</span>
+                            </div>
+                            <span className="text-zinc-800 font-medium uppercase tracking-wide">Regulatory Compliance</span>
+                        </div>
+                        <div className="flex items-center gap-4 group">
+                            <div className="w-12 h-12 border border-zinc-200 flex items-center justify-center group-hover:bg-zinc-900 group-hover:border-zinc-900 transition-colors">
+                                <span className="text-lg font-bold group-hover:text-white">03</span>
+                            </div>
+                            <span className="text-zinc-800 font-medium uppercase tracking-wide">Asset Management</span>
+                        </div>
+                     </div>
+                </div>
+             </div>
+        </section>
+
+        {/* 4. PRIVATE CLIENT SERVICES */}
+        <PrivateClientServices />
+        
+        <Testimonials category="property" />
+        <Contact />
+    </div>
   );
 };
 

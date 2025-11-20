@@ -7,76 +7,57 @@ const PropertyConsulting: React.FC = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const isVisible = useIntersectionObserver(sectionRef, { triggerOnce: true, threshold: 0.1 });
 
-  const cards = [
-    {
-      icon: (
-        <svg className="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-        </svg>
-      ),
-      titleKey: 'property.when.title',
-      descKey: 'property.when.desc'
-    },
-    {
-      icon: (
-        <svg className="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-        </svg>
-      ),
-      titleKey: 'property.where.title',
-      descKey: 'property.where.desc'
-    },
-    {
-      icon: (
-        <svg className="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-        </svg>
-      ),
-      titleKey: 'property.what.title',
-      descKey: 'property.what.desc'
-    },
-    {
-      icon: (
-        <svg className="w-10 h-10 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      ),
-      titleKey: 'property.who.title',
-      descKey: 'property.who.desc'
-    }
+  const items = [
+    { id: 'when', titleKey: 'property.when.title', descKey: 'property.when.desc' },
+    { id: 'where', titleKey: 'property.where.title', descKey: 'property.where.desc' },
+    { id: 'what', titleKey: 'property.what.title', descKey: 'property.what.desc' },
+    { id: 'who', titleKey: 'property.who.title', descKey: 'property.who.desc' }
   ];
 
   return (
     <section 
-      id="property-consulting" 
       ref={sectionRef} 
-      className={`py-28 bg-gradient-to-b from-muted/30 to-background transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
+      className={`py-32 bg-white transition-all duration-1000 ease-in-out ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-20">
-          <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl mb-4 text-foreground">
-            {t['property.title']}
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            {t['property.subtitle']}
-          </p>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-20 pb-6 border-b border-zinc-900">
+          <div className="max-w-2xl">
+            <h2 className="text-4xl font-bold tracking-tighter mb-2 text-zinc-900">
+              {t['property.title']}
+            </h2>
+            <p className="text-xl text-zinc-500 font-light">
+               {t['property.subtitle']}
+            </p>
+          </div>
+          <div className="mt-6 md:mt-0">
+             <p className="text-xs font-mono uppercase tracking-widest text-zinc-400">Advisory Scope</p>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {cards.map((card, index) => (
-            <div key={index} className="bg-card text-card-foreground p-8 rounded-3xl shadow-lg border border-border hover:shadow-[0_20px_40px_-15px_rgba(0,0,0,0.1)] transition-all duration-300 flex flex-col items-center text-center group hover:-translate-y-2 transform relative overflow-hidden">
-              <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-primary/20 via-primary to-primary/20 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-zinc-200 border border-zinc-200">
+          {items.map((item, index) => (
+            <div key={index} className="bg-white p-10 min-h-[320px] flex flex-col justify-between group hover:bg-zinc-900 transition-colors duration-500">
               
-              <div className="w-20 h-20 bg-secondary rounded-full flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300 shadow-inner">
-                 <div className="transition-all duration-300 transform group-hover:scale-110 group-hover:text-white">
-                     {React.cloneElement(card.icon as React.ReactElement<any>, { className: `w-9 h-9 ${'text-current'}` })}
-                 </div>
+              {/* Number */}
+              <div className="flex justify-between items-start">
+                  <span className="text-xs font-mono text-zinc-400 group-hover:text-zinc-600 transition-colors">
+                      0{index + 1}
+                  </span>
+                  <div className="w-2 h-2 bg-zinc-200 rounded-full group-hover:bg-white transition-colors"></div>
               </div>
-              <h3 className="text-xl font-bold mb-3">{t[card.titleKey]}</h3>
-              <p className="text-muted-foreground leading-relaxed text-sm">
-                {t[card.descKey]}
-              </p>
+              
+              {/* Content */}
+              <div>
+                 <h3 className="text-2xl font-bold mb-4 group-hover:text-white transition-colors duration-300">
+                    {t[item.titleKey]}
+                 </h3>
+                 <p className="text-zinc-500 leading-relaxed text-sm font-light group-hover:text-zinc-400 transition-colors duration-300">
+                    {t[item.descKey]}
+                 </p>
+              </div>
+
+              {/* Line */}
+              <div className="mt-8 w-full h-px bg-zinc-100 group-hover:bg-zinc-800 transition-colors"></div>
             </div>
           ))}
         </div>

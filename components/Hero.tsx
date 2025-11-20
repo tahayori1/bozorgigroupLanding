@@ -35,16 +35,17 @@ const Hero: React.FC = () => {
           {t['hero.subtitle']}
         </p>
         <div className="mt-12 animate-fade-in-up opacity-0" style={{ animationDelay: '0.5s' }}>
-             <p className="inline-block px-10 py-4 border border-gray-900/10 rounded-full bg-white/50 backdrop-blur-md text-lg font-semibold tracking-widest text-gray-900 shadow-xl hover:bg-white/80 transition-all duration-300">
+             <p className="inline-block px-6 py-3 md:px-10 md:py-4 border border-gray-900/10 rounded-full bg-white/50 backdrop-blur-md text-base md:text-lg font-semibold tracking-widest text-gray-900 shadow-xl hover:bg-white/80 transition-all duration-300">
               "{t['hero.motto']}"
             </p>
         </div>
       </div>
       
-       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce-slow opacity-80 hover:opacity-100 transition-opacity">
+      {/* Scroll Indicator: Safe positioning for Mobile */}
+       <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce-slow opacity-80 hover:opacity-100 transition-opacity">
         <a href="#departments" onClick={handleScroll} aria-label={t['hero.scroll']} className="flex flex-col items-center gap-3 text-gray-500 hover:text-primary transition-colors group">
           <span className="text-xs tracking-[0.2em] uppercase font-medium group-hover:translate-y-1 transition-transform text-gray-800">{t['hero.scroll']}</span>
-          <svg className="w-8 h-8 group-hover:translate-y-1 transition-transform text-gray-800" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" stroke="currentColor">
+          <svg className="w-6 h-6 md:w-8 md:h-8 group-hover:translate-y-1 transition-transform text-gray-800" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" viewBox="0 0 24 24" stroke="currentColor">
             <path d="M19 13l-7 7-7-7m14-8l-7 7-7-7"></path>
           </svg>
         </a>
