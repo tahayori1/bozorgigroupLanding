@@ -5,6 +5,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
 import SEO from './SEO';
 import ITLead from './ITLead';
+import ITSolutions from './ITSolutions';
 
 const AnimatedSection: React.FC<{ children: React.ReactNode, className?: string, delay?: string }> = ({ children, className = "", delay = "0ms" }) => {
     const ref = useRef<HTMLDivElement>(null);
@@ -13,7 +14,7 @@ const AnimatedSection: React.FC<{ children: React.ReactNode, className?: string,
     return (
         <div 
             ref={ref} 
-            className={`transition-all duration-1000 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'} ${className}`}
+            className={`transition-all duration-1000 ease-out transform ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'} ${className}`}
             style={{ transitionDelay: delay }}
         >
             {children}
@@ -21,44 +22,16 @@ const AnimatedSection: React.FC<{ children: React.ReactNode, className?: string,
     );
 };
 
-const ObjectionCrusher: React.FC = () => {
-    const { t } = useLanguage();
-    const [activeTab, setActiveTab] = useState(1);
-    const tabs = [1, 2, 3, 4];
-    return (
-        <section className="py-20 bg-muted/30">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                 <AnimatedSection className="text-center mb-12">
-                    <h2 className="text-3xl font-extrabold sm:text-4xl mb-4">{t['it.objections.title']}</h2>
-                </AnimatedSection>
-                <div className="grid lg:grid-cols-3 gap-8">
-                    <div className="flex flex-col gap-2">
-                        {tabs.map(tabId => (
-                            <button 
-                                key={tabId}
-                                onClick={() => setActiveTab(tabId)}
-                                className={`p-4 rounded-lg text-left text-lg font-semibold transition-all duration-300 ${activeTab === tabId ? 'bg-primary text-primary-foreground shadow-lg' : 'bg-card hover:bg-accent'}`}
-                            >
-                                {t[`it.objections.tab${tabId}.title`]}
-                            </button>
-                        ))}
-                    </div>
-                    <div className="lg:col-span-2 bg-card p-8 rounded-2xl border border-border min-h-[200px]">
-                        {tabs.map(tabId => (
-                            <div key={tabId} className={`transition-opacity duration-500 ${activeTab === tabId ? 'opacity-100' : 'opacity-0 hidden'}`}>
-                                <p className="text-muted-foreground text-xl leading-relaxed">{t[`it.objections.tab${tabId}.content`]}</p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
-}
+const MetricCard: React.FC<{ label: string, value: string, index: number }> = ({ label, value, index }) => (
+    <div className="border-l border-zinc-200 pl-6 py-2" style={{ transitionDelay: `${index * 100}ms` }}>
+        <p className="text-4xl font-bold text-zinc-900 tracking-tight mb-1">{value}</p>
+        <p className="text-xs font-mono uppercase tracking-widest text-zinc-500">{label}</p>
+    </div>
+);
 
 const PageIT: React.FC = () => {
-  const { t, locale } = useLanguage();
-  const [formState, setFormState] = useState({ name: '', phone: '', email: '', product: '', message: '', challenge: '' });
+  const { t } = useLanguage();
+  const [formState, setFormState] = useState({ name: '', email: '', website: '' });
 
   const handleScrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -66,8 +39,8 @@ const PageIT: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Thank you for your interest. We will contact you shortly with your growth plan.');
-    setFormState({ name: '', phone: '', email: '', product: '', message: '', challenge: '' });
+    alert('Request received. We will audit your system and reply shortly.');
+    setFormState({ name: '', email: '', website: '' });
   };
 
   const itSchema = {
@@ -80,217 +53,157 @@ const PageIT: React.FC = () => {
       "price": "0",
       "priceCurrency": "USD",
       "description": "Free Strategy Call Available"
-    },
-    "featureList": [
-      "Customer Acquisition Automation",
-      "Sales Funnel Automation",
-      "AI Ad Optimization"
-    ]
+    }
   };
 
   const metrics = [
-    { valueKey: 'it.stats.success' },
-    { valueKey: 'it.stats.sales' },
-    { valueKey: 'it.stats.efficiency' },
-    { valueKey: 'it.stats.uptime' },
-  ];
-  
-  const products = [
-    { id: 'acquisition', icon: '🎯' },
-    { id: 'sales', icon: '💰' },
-    { id: 'support', icon: '🤝' },
-    { id: 'ads', icon: '📢' },
-    { id: 'crm', icon: '❤️' },
-    { id: 'scenario', icon: '🔄' },
-    { id: 'strategy', icon: '🧠', isSpecial: true },
+    { value: "312%", key: 'it.stats.success' },
+    { value: "8.7x", key: 'it.stats.sales' },
+    { value: "-73%", key: 'it.stats.efficiency' },
+    { value: "100%", key: 'it.stats.uptime' },
   ];
 
   return (
-    <div className="bg-background text-foreground overflow-x-hidden">
+    <div className="bg-white text-zinc-900 selection:bg-zinc-900 selection:text-white">
       <SEO 
         titleKey="seo.it.title" 
         descriptionKey="seo.it.desc" 
         schema={itSchema} 
         canonicalPath="/?page=it"
       />
-      {/* 1. HERO SECTION */}
-      <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden bg-slate-900 text-white">
-        <div className="absolute inset-0 z-0 opacity-30">
-            <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-            <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
-            <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
-        </div>
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop')] bg-cover bg-center opacity-10"></div>
+      
+      {/* 1. HERO: FOCUS ARCHITECTURE */}
+      <section className="relative min-h-[85vh] flex flex-col justify-center pt-32 pb-20 overflow-hidden border-b border-zinc-100">
+        {/* Subtle Blueprint Grid */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:40px_40px]"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-                <div className="space-y-8 text-center lg:text-start">
-                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/20 border border-primary/50 text-primary font-medium text-sm animate-fadeIn">
-                       {t['it.hero.badge']}
-                    </div>
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
-                        {t['it.title']}
-                        <span className="block text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400 mt-2">
-                            10x ROI.
-                        </span>
-                    </h1>
-                    <p className="text-xl text-gray-300 max-w-2xl mx-auto lg:mx-0">
-                        {t['it.subtitle']}
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                        <button onClick={() => handleScrollTo('lead-form')} className="px-8 py-4 rounded-lg bg-primary text-primary-foreground font-bold text-lg hover:scale-105 transition-transform shadow-lg shadow-primary/25">
-                            {t['it.hero.cta']}
-                        </button>
-                         <button onClick={() => handleScrollTo('testimonials')} className="px-8 py-4 rounded-lg bg-transparent border-2 border-primary text-primary font-bold text-lg hover:bg-primary/10 transition-colors">
-                            {t['it.hero.cta_secondary']}
-                        </button>
-                    </div>
-                     <p className="text-sm text-gray-400">{t['it.hero.trustline']}</p>
+             <AnimatedSection>
+                <div className="inline-flex items-center gap-2 px-3 py-1 border border-zinc-200 rounded-full bg-white mb-8">
+                    <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                    <span className="text-xs font-mono uppercase tracking-widest text-zinc-500">System Operational</span>
                 </div>
-            </div>
-
-            <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-white/10 pt-8">
-                {metrics.map((m, idx) => (
-                    <div key={idx} className="text-center">
-                        <div className="text-2xl md:text-3xl font-bold text-primary mb-1">{t[m.valueKey].split(' ')[0]}</div>
-                        <div className="text-sm text-gray-400 uppercase tracking-wider">{t[m.valueKey].substring(t[m.valueKey].indexOf(' ') + 1)}</div>
-                    </div>
-                ))}
-            </div>
-        </div>
-      </section>
-
-      {/* 2. OBJECTION CRUSHER */}
-      <ObjectionCrusher />
-      
-      {/* 3. WHY CHOOSE US */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="text-center mb-16">
-                <h2 className="text-3xl font-extrabold sm:text-4xl mb-4">{t['it.why.title']}</h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">{t['it.why.subtitle']}</p>
-            </AnimatedSection>
-            
-            <div className="grid md:grid-cols-3 gap-8">
-                <AnimatedSection delay="100ms" className="p-8 rounded-2xl bg-card border border-border shadow-lg hover:shadow-xl transition-all">
-                    <div className="w-14 h-14 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center text-3xl mb-6">🌙</div>
-                    <h3 className="text-xl font-bold mb-3">{t['it.why.speed.title']}</h3>
-                    <p className="text-muted-foreground">{t['it.why.speed.desc']}</p>
-                </AnimatedSection>
-                <AnimatedSection delay="200ms" className="p-8 rounded-2xl bg-card border border-border shadow-lg hover:shadow-xl transition-all">
-                    <div className="w-14 h-14 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center text-3xl mb-6">🛡️</div>
-                    <h3 className="text-xl font-bold mb-3">{t['it.why.security.title']}</h3>
-                    <p className="text-muted-foreground">{t['it.why.security.desc']}</p>
-                </AnimatedSection>
-                <AnimatedSection delay="300ms" className="p-8 rounded-2xl bg-card border border-border shadow-lg hover:shadow-xl transition-all">
-                    <div className="w-14 h-14 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center text-3xl mb-6">💡</div>
-                    <h3 className="text-xl font-bold mb-3">{t['it.why.growth.title']}</h3>
-                    <p className="text-muted-foreground">{t['it.why.growth.desc']}</p>
-                </AnimatedSection>
-            </div>
-            <AnimatedSection className="mt-12 text-center p-4 rounded-lg bg-primary/10 border border-primary/20">
-                <p className="font-semibold text-primary">{t['it.why.guarantee']}</p>
-            </AnimatedSection>
-        </div>
-      </section>
-
-      {/* 4. PRODUCTS GRID */}
-      <section id="it-products" className="py-20 bg-muted/50">
-         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <AnimatedSection className="text-center mb-16">
-                <h2 className="text-3xl font-extrabold sm:text-4xl mb-4">{t['it.products.title']}</h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">{t['it.products.subtitle']}</p>
-            </AnimatedSection>
-
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {products.map((prod, idx) => (
-                    <AnimatedSection key={prod.id} delay={`${idx * 100}ms`} className={`group relative p-8 rounded-2xl border transition-all duration-300 hover:-translate-y-2 ${prod.isSpecial ? 'bg-primary text-primary-foreground border-primary shadow-2xl shadow-primary/20 lg:col-span-3 lg:flex lg:items-center lg:gap-8' : 'bg-card hover:shadow-xl border-border'}`}>
-                        <div className={`text-4xl mb-6 ${prod.isSpecial ? 'lg:mb-0 lg:text-6xl' : ''}`}>{prod.icon}</div>
-                        <div>
-                            {prod.isSpecial && <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold mb-2 backdrop-blur-sm">{t['it.prod.strategy.badge']}</span>}
-                            <h3 className={`text-xl font-bold mb-2 ${prod.isSpecial ? 'text-white text-2xl' : ''}`}>{t[`it.prod.${prod.id}.title`]}</h3>
-                            <p className={`${prod.isSpecial ? 'text-white/90' : 'text-muted-foreground'}`}>{t[`it.prod.${prod.id}.desc`]}</p>
-                        </div>
-                        {prod.isSpecial && (
-                             <button onClick={() => handleScrollTo('lead-form')} className="mt-6 lg:mt-0 lg:ml-auto shrink-0 bg-white text-primary px-6 py-3 rounded-lg font-bold hover:bg-gray-100 transition-colors">
-                                {t['it.hero.cta']}
-                             </button>
-                        )}
-                    </AnimatedSection>
-                ))}
-            </div>
-         </div>
-      </section>
-
-      {/* 5. PROCESS */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-             <AnimatedSection className="text-center mb-16">
-                <h2 className="text-3xl font-extrabold sm:text-4xl mb-4">{t['it.process.title']}</h2>
-                <p className="text-xl text-muted-foreground max-w-3xl mx-auto">{t['it.process.subtitle']}</p>
-            </AnimatedSection>
-
-            <div className="relative grid md:grid-cols-3 gap-8">
-                <div className="hidden md:block absolute top-12 left-1/6 right-1/6 h-0.5 bg-border z-0"></div>
                 
-                {[1, 2, 3].map((step) => (
-                    <AnimatedSection key={step} delay={`${step * 200}ms`} className="relative z-10 flex flex-col items-center text-center">
-                        <div className="w-24 h-24 rounded-full bg-card border-4 border-primary flex items-center justify-center text-3xl font-bold text-primary shadow-lg mb-6">
-                            {step}
+                <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter text-zinc-900 leading-[0.9] mb-8">
+                    AUTOMATION<br />
+                    <span className="text-zinc-400">IS LEVERAGE.</span>
+                </h1>
+             </AnimatedSection>
+
+             <div className="grid lg:grid-cols-12 gap-12 items-end mt-12">
+                <div className="lg:col-span-5">
+                    <AnimatedSection delay="200ms">
+                        <p className="text-xl md:text-2xl text-zinc-600 font-light leading-relaxed">
+                            {t['it.subtitle']}
+                        </p>
+                        <div className="mt-8 flex flex-wrap gap-4">
+                             <button onClick={() => handleScrollTo('lead-form')} className="px-8 py-4 bg-zinc-900 text-white font-medium text-sm uppercase tracking-widest hover:bg-zinc-800 transition-colors">
+                                {t['it.hero.cta']}
+                            </button>
+                            <button onClick={() => handleScrollTo('solutions')} className="px-8 py-4 border border-zinc-200 text-zinc-900 font-medium text-sm uppercase tracking-widest hover:bg-zinc-50 transition-colors">
+                                {t['it.hero.cta_secondary']}
+                            </button>
                         </div>
-                        <h3 className="text-xl font-bold mb-3">{t[`it.process.step${step}.title`]}</h3>
-                        <p className="text-muted-foreground">{t[`it.process.step${step}.desc`]}</p>
                     </AnimatedSection>
-                ))}
-            </div>
+                </div>
+                <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-4 gap-6">
+                    {metrics.map((m, idx) => (
+                        <MetricCard 
+                            key={idx} 
+                            index={idx} 
+                            value={m.value} 
+                            label={t[m.key].split(' ').slice(1).join(' ')} 
+                        />
+                    ))}
+                </div>
+             </div>
         </div>
       </section>
 
-      {/* 6. IT LEAD PROFILE */}
-      <ITLead />
-
-      {/* 7. TESTIMONIALS */}
-      <div id="testimonials">
-        <Testimonials category="it" />
+      {/* 2. SOLUTIONS (Refined) */}
+      <div id="solutions">
+        <ITSolutions />
       </div>
 
-      {/* 8. LEAD FORM */}
-      <section id="lead-form" className="py-20 bg-slate-900 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 md:p-12 border border-white/10 shadow-2xl">
-                <div className="text-center mb-10">
-                    <h2 className="text-3xl font-bold mb-4">{t['it.form.title']}</h2>
-                    <p className="text-gray-300">{t['it.form.subtitle']}</p>
-                </div>
+      {/* 3. PROCESS: LINEAR & CLEAN */}
+      <section className="py-32 bg-white border-t border-zinc-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+             <AnimatedSection className="mb-20 max-w-2xl">
+                <h2 className="text-4xl font-bold tracking-tight mb-6">{t['it.process.title']}</h2>
+                <div className="h-1 w-20 bg-zinc-900"></div>
+            </AnimatedSection>
 
-                <form onSubmit={handleFormSubmit} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-300">{t['it.form.name']}</label>
-                            <input required type="text" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formState.name} onChange={e => setFormState({...formState, name: e.target.value})} />
-                        </div>
-                        <div className="space-y-2">
-                            <label className="text-sm font-medium text-gray-300">{t['it.form.phone']}</label>
-                            <input type="tel" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formState.phone} onChange={e => setFormState({...formState, phone: e.target.value})} />
-                        </div>
-                    </div>
-                     <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-300">{t['it.form.challenge']}</label>
-                        <input required type="text" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formState.challenge} onChange={e => setFormState({...formState, challenge: e.target.value})} />
-                    </div>
-                    <div className="space-y-2">
-                        <label className="text-sm font-medium text-gray-300">{t['it.form.email']}</label>
-                        <input required type="email" className="w-full px-4 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-gray-500 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors" value={formState.email} onChange={e => setFormState({...formState, email: e.target.value})} />
-                    </div>
-                    
-                    <button type="submit" className="w-full py-4 rounded-lg bg-gradient-to-r from-primary to-yellow-500 text-black font-bold text-lg hover:opacity-90 transition-opacity shadow-lg">
-                        {t['it.form.submit']}
-                    </button>
-                    <p className="text-xs text-center text-gray-500 mt-4">{t['it.form.disclaimer']}</p>
-                </form>
+            <div className="grid md:grid-cols-3 gap-12 relative">
+                <div className="hidden md:block absolute top-8 left-0 w-full h-px bg-zinc-200 z-0"></div>
+                
+                {[1, 2, 3].map((step) => (
+                    <AnimatedSection key={step} delay={`${step * 150}ms`} className="relative z-10 bg-white pr-8">
+                        <div className="text-6xl font-bold text-zinc-100 mb-4 transition-colors duration-500 hover:text-zinc-900 cursor-default">0{step}</div>
+                        <h3 className="text-lg font-bold uppercase tracking-wide mb-3">{t[`it.process.step${step}.title`]}</h3>
+                        <p className="text-zinc-500 font-light leading-relaxed">{t[`it.process.step${step}.desc`]}</p>
+                    </AnimatedSection>
+                ))}
             </div>
         </div>
       </section>
+
+      {/* 4. LEAD PROFILE */}
+      <ITLead />
+
+      {/* 5. MINIMALIST AUDIT FORM */}
+      <section id="lead-form" className="py-32 bg-zinc-50">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+                <h2 className="text-3xl font-bold tracking-tight mb-4">{t['it.form.title']}</h2>
+                <p className="text-zinc-500">{t['it.form.subtitle']}</p>
+            </div>
+
+            <form onSubmit={handleFormSubmit} className="bg-white p-10 border border-zinc-200 shadow-sm">
+                <div className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="space-y-1">
+                            <label className="text-xs font-bold uppercase tracking-widest text-zinc-400">{t['it.form.name']}</label>
+                            <input 
+                                required 
+                                type="text" 
+                                className="w-full bg-transparent border-b border-zinc-300 py-2 text-zinc-900 focus:outline-none focus:border-zinc-900 transition-colors rounded-none" 
+                                value={formState.name} 
+                                onChange={e => setFormState({...formState, name: e.target.value})} 
+                            />
+                        </div>
+                         <div className="space-y-1">
+                            <label className="text-xs font-bold uppercase tracking-widest text-zinc-400">{t['it.form.email']}</label>
+                            <input 
+                                required 
+                                type="email" 
+                                className="w-full bg-transparent border-b border-zinc-300 py-2 text-zinc-900 focus:outline-none focus:border-zinc-900 transition-colors rounded-none" 
+                                value={formState.email} 
+                                onChange={e => setFormState({...formState, email: e.target.value})} 
+                            />
+                        </div>
+                    </div>
+                     <div className="space-y-1">
+                        <label className="text-xs font-bold uppercase tracking-widest text-zinc-400">Company Website</label>
+                        <input 
+                            type="text" 
+                            className="w-full bg-transparent border-b border-zinc-300 py-2 text-zinc-900 focus:outline-none focus:border-zinc-900 transition-colors rounded-none" 
+                            value={formState.website} 
+                            onChange={e => setFormState({...formState, website: e.target.value})} 
+                        />
+                    </div>
+                    
+                    <div className="pt-6">
+                        <button type="submit" className="w-full py-4 bg-zinc-900 text-white font-bold text-sm uppercase tracking-widest hover:bg-black transition-colors">
+                            {t['it.form.submit']}
+                        </button>
+                    </div>
+                    <p className="text-xs text-center text-zinc-400 mt-4 font-mono">SECURE & CONFIDENTIAL</p>
+                </div>
+            </form>
+        </div>
+      </section>
+      
+      <Testimonials category="it" />
       <Contact />
     </div>
   );
